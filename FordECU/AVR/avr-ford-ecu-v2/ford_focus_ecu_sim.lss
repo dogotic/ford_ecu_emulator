@@ -1,0 +1,1718 @@
+
+ford_focus_ecu_sim.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000008e0  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000006  00800060  00800060  00000954  2**0
+                  ALLOC
+  2 .debug_aranges 00000120  00000000  00000000  00000954  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_pubnames 0000022f  00000000  00000000  00000a74  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   00000edf  00000000  00000000  00000ca3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 00000895  00000000  00000000  00001b82  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   000015b8  00000000  00000000  00002417  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000180  00000000  00000000  000039d0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    0000041e  00000000  00000000  00003b50  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    0000050b  00000000  00000000  00003f6e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000020  00000000  00000000  00004479  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	2e c0       	rjmp	.+92     	; 0x5e <__ctors_end>
+   2:	3d c0       	rjmp	.+122    	; 0x7e <__bad_interrupt>
+   4:	3c c0       	rjmp	.+120    	; 0x7e <__bad_interrupt>
+   6:	3b c0       	rjmp	.+118    	; 0x7e <__bad_interrupt>
+   8:	3a c0       	rjmp	.+116    	; 0x7e <__bad_interrupt>
+   a:	39 c0       	rjmp	.+114    	; 0x7e <__bad_interrupt>
+   c:	38 c0       	rjmp	.+112    	; 0x7e <__bad_interrupt>
+   e:	37 c0       	rjmp	.+110    	; 0x7e <__bad_interrupt>
+  10:	36 c0       	rjmp	.+108    	; 0x7e <__bad_interrupt>
+  12:	35 c0       	rjmp	.+106    	; 0x7e <__bad_interrupt>
+  14:	34 c0       	rjmp	.+104    	; 0x7e <__bad_interrupt>
+  16:	33 c0       	rjmp	.+102    	; 0x7e <__bad_interrupt>
+  18:	32 c0       	rjmp	.+100    	; 0x7e <__bad_interrupt>
+  1a:	31 c0       	rjmp	.+98     	; 0x7e <__bad_interrupt>
+  1c:	30 c0       	rjmp	.+96     	; 0x7e <__bad_interrupt>
+  1e:	2f c0       	rjmp	.+94     	; 0x7e <__bad_interrupt>
+  20:	2e c0       	rjmp	.+92     	; 0x7e <__bad_interrupt>
+  22:	2d c0       	rjmp	.+90     	; 0x7e <__bad_interrupt>
+  24:	2c c0       	rjmp	.+88     	; 0x7e <__bad_interrupt>
+
+00000026 <can_filter>:
+	...
+
+00000046 <_mcp2515_cnf>:
+  46:	04 b6 e7 04 b6 d3 04 b6 c7 04 b6 c3 02 90 07 03     ................
+  56:	ac 81 03 ac 80 02 90 00                             ........
+
+0000005e <__ctors_end>:
+  5e:	11 24       	eor	r1, r1
+  60:	1f be       	out	0x3f, r1	; 63
+  62:	cf e5       	ldi	r28, 0x5F	; 95
+  64:	d4 e0       	ldi	r29, 0x04	; 4
+  66:	de bf       	out	0x3e, r29	; 62
+  68:	cd bf       	out	0x3d, r28	; 61
+
+0000006a <__do_clear_bss>:
+  6a:	10 e0       	ldi	r17, 0x00	; 0
+  6c:	a0 e6       	ldi	r26, 0x60	; 96
+  6e:	b0 e0       	ldi	r27, 0x00	; 0
+  70:	01 c0       	rjmp	.+2      	; 0x74 <.do_clear_bss_start>
+
+00000072 <.do_clear_bss_loop>:
+  72:	1d 92       	st	X+, r1
+
+00000074 <.do_clear_bss_start>:
+  74:	a6 36       	cpi	r26, 0x66	; 102
+  76:	b1 07       	cpc	r27, r17
+  78:	e1 f7       	brne	.-8      	; 0x72 <.do_clear_bss_loop>
+  7a:	02 d0       	rcall	.+4      	; 0x80 <main>
+  7c:	2f c4       	rjmp	.+2142   	; 0x8dc <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	c0 cf       	rjmp	.-128    	; 0x0 <__vectors>
+
+00000080 <main>:
+
+// -----------------------------------------------------------------------------
+// Main loop for receiving and sending messages.
+
+int main(void)
+{
+  80:	2f 92       	push	r2
+  82:	3f 92       	push	r3
+  84:	4f 92       	push	r4
+  86:	5f 92       	push	r5
+  88:	6f 92       	push	r6
+  8a:	7f 92       	push	r7
+  8c:	8f 92       	push	r8
+  8e:	9f 92       	push	r9
+  90:	af 92       	push	r10
+  92:	bf 92       	push	r11
+  94:	cf 92       	push	r12
+  96:	df 92       	push	r13
+  98:	ef 92       	push	r14
+  9a:	ff 92       	push	r15
+  9c:	0f 93       	push	r16
+  9e:	1f 93       	push	r17
+  a0:	df 93       	push	r29
+  a2:	cf 93       	push	r28
+  a4:	cd b7       	in	r28, 0x3d	; 61
+  a6:	de b7       	in	r29, 0x3e	; 62
+  a8:	6c 97       	sbiw	r28, 0x1c	; 28
+  aa:	0f b6       	in	r0, 0x3f	; 63
+  ac:	f8 94       	cli
+  ae:	de bf       	out	0x3e, r29	; 62
+  b0:	0f be       	out	0x3f, r0	; 63
+  b2:	cd bf       	out	0x3d, r28	; 61
+	// Initialize MCP2515
+	// can_init(BITRATE_500_KBPS);
+    can_init(BITRATE_1_MBPS); /* for some retarded reason 1_mbps needs to be setup to get 500 kbps baudrate 
+  b4:	87 e0       	ldi	r24, 0x07	; 7
+  b6:	53 d2       	rcall	.+1190   	; 0x55e <can_init>
+                                 possible AVR oscilator problem / wrong BTR values */
+	
+	// Load filters and masks
+	can_static_filter(can_filter);
+  b8:	86 e2       	ldi	r24, 0x26	; 38
+  ba:	90 e0       	ldi	r25, 0x00	; 0
+  bc:	51 d3       	rcall	.+1698   	; 0x760 <can_static_filter>
+	
+	// Create a test messsage
+	can_t rx_msg;
+    can_t tx_msg; 
+	
+	rx_msg.id = PCM_ID_RESPONSE;
+  be:	28 ee       	ldi	r18, 0xE8	; 232
+  c0:	37 e0       	ldi	r19, 0x07	; 7
+  c2:	40 e0       	ldi	r20, 0x00	; 0
+  c4:	50 e0       	ldi	r21, 0x00	; 0
+  c6:	29 83       	std	Y+1, r18	; 0x01
+  c8:	3a 83       	std	Y+2, r19	; 0x02
+  ca:	4b 83       	std	Y+3, r20	; 0x03
+  cc:	5c 83       	std	Y+4, r21	; 0x04
+	rx_msg.flags.rtr = 0;
+  ce:	8d 81       	ldd	r24, Y+5	; 0x05
+	rx_msg.flags.extended = 0;
+  d0:	8c 7f       	andi	r24, 0xFC	; 252
+  d2:	8d 83       	std	Y+5, r24	; 0x05
+	rx_msg.length = 8;
+  d4:	98 e0       	ldi	r25, 0x08	; 8
+  d6:	9e 83       	std	Y+6, r25	; 0x06
+
+    tx_msg.id = PCM_ID_RESPONSE;
+  d8:	2f 87       	std	Y+15, r18	; 0x0f
+  da:	38 8b       	std	Y+16, r19	; 0x10
+  dc:	49 8b       	std	Y+17, r20	; 0x11
+  de:	5a 8b       	std	Y+18, r21	; 0x12
+	tx_msg.flags.rtr = 0;
+  e0:	8b 89       	ldd	r24, Y+19	; 0x13
+	tx_msg.flags.extended = 0;
+  e2:	8c 7f       	andi	r24, 0xFC	; 252
+  e4:	8b 8b       	std	Y+19, r24	; 0x13
+	tx_msg.length = 8;
+  e6:	9c 8b       	std	Y+20, r25	; 0x14
+                    /* --- TROUBLE CODES --- */
+
+                    if (rx_msg.data[1] == 0x18)
+                    {
+                        /* sending P0210 code */
+                        tx_msg.data[0] = 0x05;
+  e8:	85 e0       	ldi	r24, 0x05	; 5
+  ea:	68 2e       	mov	r6, r24
+                        tx_msg.data[1] = rx_msg.data[1] + 0x40;
+                        tx_msg.data[2] = 0x01;  // number of error codes
+  ec:	aa 24       	eor	r10, r10
+  ee:	a3 94       	inc	r10
+                        tx_msg.data[3] = 0x00;  // first part of error code
+                        tx_msg.data[4] = 0x10;  // second part of error code ... the code is P0010
+                        tx_msg.data[5] = 0xff;  // end of error codes 
+                        tx_msg.data[6] = 0x00;
+                        tx_msg.data[7] = 0x00;
+                        can_send_message(&tx_msg);
+  f0:	0f e0       	ldi	r16, 0x0F	; 15
+  f2:	c0 2e       	mov	r12, r16
+  f4:	d1 2c       	mov	r13, r1
+  f6:	cc 0e       	add	r12, r28
+  f8:	dd 1e       	adc	r13, r29
+                        /* --- FAN speed ---- */
+                        if (rx_msg.data[2] == 0x16)
+                        {
+                            if (rx_msg.data[3] == 0xAA)
+                            {
+                                tx_msg.data[0] = 0x4;
+  fa:	14 e0       	ldi	r17, 0x04	; 4
+  fc:	91 2e       	mov	r9, r17
+
+                        if (rx_msg.data[2] == 0x18)
+                        {
+                            if (rx_msg.data[3] == 0x00)
+                            {
+                                tx_msg.data[0] = 0x7;
+  fe:	b7 e0       	ldi	r27, 0x07	; 7
+ 100:	bb 2e       	mov	r11, r27
+                                can_send_message(&tx_msg);    
+                            }
+                            else if (rx_msg.data[3] == 0x04)
+                            {
+                                tx_msg.data[0] = 0x7;
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 102:	a2 e6       	ldi	r26, 0x62	; 98
+ 104:	ea 2e       	mov	r14, r26
+                                tx_msg.data[2] = rx_msg.data[2];
+ 106:	f3 ee       	ldi	r31, 0xE3	; 227
+ 108:	4f 2e       	mov	r4, r31
+                                tx_msg.data[3] = rx_msg.data[3];
+                                tx_msg.data[4] = '2';
+ 10a:	e2 e3       	ldi	r30, 0x32	; 50
+ 10c:	7e 2e       	mov	r7, r30
+                                tx_msg.data[5] = '8';
+ 10e:	78 e3       	ldi	r23, 0x38	; 56
+ 110:	87 2e       	mov	r8, r23
+                            {
+                                tx_msg.data[0] = 0x7;
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+                                tx_msg.data[2] = rx_msg.data[2];
+                                tx_msg.data[3] = rx_msg.data[3];
+                                tx_msg.data[4] = '5';
+ 112:	65 e3       	ldi	r22, 0x35	; 53
+ 114:	26 2e       	mov	r2, r22
+                                tx_msg.data[5] = '7';
+ 116:	57 e3       	ldi	r21, 0x37	; 55
+ 118:	55 2e       	mov	r5, r21
+                            else if (rx_msg.data[3] == 0x21)
+                            {
+
+                                tx_msg.data[0] = 0x7;
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+                                tx_msg.data[2] = rx_msg.data[2];
+ 11a:	42 ee       	ldi	r20, 0xE2	; 226
+ 11c:	34 2e       	mov	r3, r20
+	tx_msg.length = 8;
+
+	while (1)
+	{
+		// Check if a new messag was received
+		if (can_check_message())
+ 11e:	75 d2       	rcall	.+1258   	; 0x60a <can_check_message>
+ 120:	88 23       	and	r24, r24
+ 122:	e9 f3       	breq	.-6      	; 0x11e <main+0x9e>
+		{
+			// Try to read the message
+			if (can_get_message(&rx_msg))
+ 124:	ce 01       	movw	r24, r28
+ 126:	01 96       	adiw	r24, 0x01	; 1
+ 128:	7d d2       	rcall	.+1274   	; 0x624 <can_get_message>
+ 12a:	88 23       	and	r24, r24
+ 12c:	c1 f3       	breq	.-16     	; 0x11e <main+0x9e>
+			{
+
+                if (rx_msg.id == PCM_ID_REQUEST)
+ 12e:	89 81       	ldd	r24, Y+1	; 0x01
+ 130:	9a 81       	ldd	r25, Y+2	; 0x02
+ 132:	ab 81       	ldd	r26, Y+3	; 0x03
+ 134:	bc 81       	ldd	r27, Y+4	; 0x04
+ 136:	80 5e       	subi	r24, 0xE0	; 224
+ 138:	97 40       	sbci	r25, 0x07	; 7
+ 13a:	a0 40       	sbci	r26, 0x00	; 0
+ 13c:	b0 40       	sbci	r27, 0x00	; 0
+ 13e:	79 f7       	brne	.-34     	; 0x11e <main+0x9e>
+                {
+
+                    /* Request for data */
+                    if (rx_msg.data[1] == 0x22)
+ 140:	88 85       	ldd	r24, Y+8	; 0x08
+ 142:	82 32       	cpi	r24, 0x22	; 34
+ 144:	09 f0       	breq	.+2      	; 0x148 <main+0xc8>
+ 146:	c4 c1       	rjmp	.+904    	; 0x4d0 <__stack+0x71>
+                    {
+                        /* --- ECU AND VEHICLE IDENTIFICATION --- */
+
+                        /* call PCM */
+                        if (rx_msg.data[2] == 0x02)
+ 148:	99 85       	ldd	r25, Y+9	; 0x09
+ 14a:	92 30       	cpi	r25, 0x02	; 2
+ 14c:	49 f4       	brne	.+18     	; 0x160 <main+0xe0>
+                        {
+                            tx_msg.data[0] = 0x3;
+ 14e:	83 e0       	ldi	r24, 0x03	; 3
+ 150:	8d 8b       	std	Y+21, r24	; 0x15
+                            tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 152:	ee 8a       	std	Y+22, r14	; 0x16
+                            tx_msg.data[2] = rx_msg.data[2];
+ 154:	9f 8b       	std	Y+23, r25	; 0x17
+                            tx_msg.data[3] = rx_msg.data[3];
+ 156:	8a 85       	ldd	r24, Y+10	; 0x0a
+ 158:	88 8f       	std	Y+24, r24	; 0x18
+                            tx_msg.data[4] = 0x00;
+ 15a:	19 8e       	std	Y+25, r1	; 0x19
+                            tx_msg.data[5] = 0x00;
+ 15c:	1a 8e       	std	Y+26, r1	; 0x1a
+ 15e:	1a c0       	rjmp	.+52     	; 0x194 <main+0x114>
+                        }
+
+                        /* --- ECU & Vehicle IDENTIFICATION PART --- */
+
+                        /* System Identification */
+                        else if (rx_msg.data[2] ==  0xC9)
+ 160:	99 3c       	cpi	r25, 0xC9	; 201
+ 162:	d1 f4       	brne	.+52     	; 0x198 <main+0x118>
+                        {
+                            if (rx_msg.data[3] == 0x2E)
+ 164:	8a 85       	ldd	r24, Y+10	; 0x0a
+ 166:	8e 32       	cpi	r24, 0x2E	; 46
+ 168:	61 f4       	brne	.+24     	; 0x182 <main+0x102>
+                            {
+                                tx_msg.data[0] = 0x7;
+ 16a:	bd 8a       	std	Y+21, r11	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 16c:	ee 8a       	std	Y+22, r14	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 16e:	9f 8b       	std	Y+23, r25	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 170:	88 8f       	std	Y+24, r24	; 0x18
+                                tx_msg.data[4] = 'S';
+ 172:	83 e5       	ldi	r24, 0x53	; 83
+ 174:	89 8f       	std	Y+25, r24	; 0x19
+                                tx_msg.data[5] = 'I';
+ 176:	89 e4       	ldi	r24, 0x49	; 73
+ 178:	8a 8f       	std	Y+26, r24	; 0x1a
+                                tx_msg.data[6] = 'M';
+ 17a:	8d e4       	ldi	r24, 0x4D	; 77
+ 17c:	8b 8f       	std	Y+27, r24	; 0x1b
+                                tx_msg.data[7] = '-';
+ 17e:	8d e2       	ldi	r24, 0x2D	; 45
+ 180:	35 c0       	rjmp	.+106    	; 0x1ec <main+0x16c>
+                                can_send_message(&tx_msg);    
+                            }
+                            else if (rx_msg.data[3] == 0x2F)
+ 182:	8f 32       	cpi	r24, 0x2F	; 47
+ 184:	09 f0       	breq	.+2      	; 0x188 <main+0x108>
+ 186:	be c0       	rjmp	.+380    	; 0x304 <main+0x284>
+                            {
+                                tx_msg.data[0] = 0x5;
+ 188:	6d 8a       	std	Y+21, r6	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 18a:	ee 8a       	std	Y+22, r14	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 18c:	9f 8b       	std	Y+23, r25	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 18e:	88 8f       	std	Y+24, r24	; 0x18
+                                tx_msg.data[4] = '2';
+ 190:	79 8e       	std	Y+25, r7	; 0x19
+                                tx_msg.data[5] = '8';
+ 192:	8a 8e       	std	Y+26, r8	; 0x1a
+                                tx_msg.data[6] = 0x00;
+ 194:	1b 8e       	std	Y+27, r1	; 0x1b
+ 196:	38 c0       	rjmp	.+112    	; 0x208 <main+0x188>
+                                can_send_message(&tx_msg);    
+                            }
+                        }
+
+                        /* send manufacturng date, ECU Part number, ECU serial number */
+                        else if (rx_msg.data[2] ==  0xE2)
+ 198:	92 3e       	cpi	r25, 0xE2	; 226
+ 19a:	09 f0       	breq	.+2      	; 0x19e <main+0x11e>
+ 19c:	70 c0       	rjmp	.+224    	; 0x27e <main+0x1fe>
+                        {
+                            /* Send Manufacturing Date -> Ford Focus 2006/57/27 */
+                            if (rx_msg.data[3] == 0x00)
+ 19e:	8a 85       	ldd	r24, Y+10	; 0x0a
+ 1a0:	88 23       	and	r24, r24
+ 1a2:	59 f4       	brne	.+22     	; 0x1ba <main+0x13a>
+                            {
+                                tx_msg.data[0] = 0x6;
+ 1a4:	86 e0       	ldi	r24, 0x06	; 6
+ 1a6:	8d 8b       	std	Y+21, r24	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 1a8:	ee 8a       	std	Y+22, r14	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 1aa:	9f 8b       	std	Y+23, r25	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 1ac:	18 8e       	std	Y+24, r1	; 0x18
+                                tx_msg.data[4] = 57;  
+ 1ae:	89 e3       	ldi	r24, 0x39	; 57
+ 1b0:	89 8f       	std	Y+25, r24	; 0x19
+                                tx_msg.data[5] = 27;
+ 1b2:	8b e1       	ldi	r24, 0x1B	; 27
+ 1b4:	8a 8f       	std	Y+26, r24	; 0x1a
+                                tx_msg.data[6] = 106; /* Manufacturing year - 1900 */
+ 1b6:	8a e6       	ldi	r24, 0x6A	; 106
+ 1b8:	26 c0       	rjmp	.+76     	; 0x206 <main+0x186>
+                                tx_msg.data[7] = 0x00;   /* I gues it's padding */
+                                can_send_message(&tx_msg);    
+                            }
+
+                            /* ECU Part Number #1 part */
+                            else if (rx_msg.data[3] == 0x1A)
+ 1ba:	8a 31       	cpi	r24, 0x1A	; 26
+ 1bc:	51 f4       	brne	.+20     	; 0x1d2 <main+0x152>
+                            {
+                                tx_msg.data[0] = 0x7;
+ 1be:	bd 8a       	std	Y+21, r11	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 1c0:	ee 8a       	std	Y+22, r14	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 1c2:	9f 8b       	std	Y+23, r25	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 1c4:	88 8f       	std	Y+24, r24	; 0x18
+                                tx_msg.data[4] = '7';
+ 1c6:	59 8e       	std	Y+25, r5	; 0x19
+                                tx_msg.data[5] = 'M';
+ 1c8:	2d e4       	ldi	r18, 0x4D	; 77
+ 1ca:	2a 8f       	std	Y+26, r18	; 0x1a
+                                tx_msg.data[6] = '5';
+ 1cc:	2b 8e       	std	Y+27, r2	; 0x1b
+                                tx_msg.data[7] = '1';
+ 1ce:	81 e3       	ldi	r24, 0x31	; 49
+ 1d0:	0d c0       	rjmp	.+26     	; 0x1ec <main+0x16c>
+                                can_send_message(&tx_msg);   
+                            }
+
+                            /* ECU Part Number #2 part */
+                            else if (rx_msg.data[3] == 0x17)
+ 1d2:	87 31       	cpi	r24, 0x17	; 23
+ 1d4:	69 f4       	brne	.+26     	; 0x1f0 <main+0x170>
+                            {
+                                tx_msg.data[0] = 0x7;
+ 1d6:	bd 8a       	std	Y+21, r11	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 1d8:	ee 8a       	std	Y+22, r14	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 1da:	3f 8a       	std	Y+23, r3	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 1dc:	88 8f       	std	Y+24, r24	; 0x18
+                                tx_msg.data[4] = 0x12;
+ 1de:	82 e1       	ldi	r24, 0x12	; 18
+ 1e0:	89 8f       	std	Y+25, r24	; 0x19
+                                tx_msg.data[5] = 0xA;
+ 1e2:	8a e0       	ldi	r24, 0x0A	; 10
+ 1e4:	8a 8f       	std	Y+26, r24	; 0x1a
+                                tx_msg.data[6] = 0x06;
+ 1e6:	86 e0       	ldi	r24, 0x06	; 6
+ 1e8:	8b 8f       	std	Y+27, r24	; 0x1b
+                                tx_msg.data[7] = 0x50;
+ 1ea:	80 e5       	ldi	r24, 0x50	; 80
+ 1ec:	8c 8f       	std	Y+28, r24	; 0x1c
+ 1ee:	88 c0       	rjmp	.+272    	; 0x300 <main+0x280>
+                                can_send_message(&tx_msg);   
+                            }
+
+                            /* ECU Part Number #3 part */
+                            else if (rx_msg.data[3] == 0x1D)
+ 1f0:	8d 31       	cpi	r24, 0x1D	; 29
+ 1f2:	61 f4       	brne	.+24     	; 0x20c <main+0x18c>
+                            {
+                                tx_msg.data[0] = 0x7;
+ 1f4:	bd 8a       	std	Y+21, r11	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 1f6:	ee 8a       	std	Y+22, r14	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 1f8:	3f 8a       	std	Y+23, r3	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 1fa:	88 8f       	std	Y+24, r24	; 0x18
+                                tx_msg.data[4] = 'A';
+ 1fc:	81 e4       	ldi	r24, 0x41	; 65
+ 1fe:	89 8f       	std	Y+25, r24	; 0x19
+                                tx_msg.data[5] = 'F';
+ 200:	86 e4       	ldi	r24, 0x46	; 70
+ 202:	8a 8f       	std	Y+26, r24	; 0x1a
+                                tx_msg.data[6] = 'B';
+ 204:	82 e4       	ldi	r24, 0x42	; 66
+ 206:	8b 8f       	std	Y+27, r24	; 0x1b
+                                tx_msg.data[7] = 0x00;
+ 208:	1c 8e       	std	Y+28, r1	; 0x1c
+ 20a:	7a c0       	rjmp	.+244    	; 0x300 <main+0x280>
+    */
+
+                            /* send serial number 270487626 as asii characters.*/
+                            /* I have added a 5ms delay between message sending 
+                             * but am not sure if it is needed. 1ms will not work  */
+                            else if (rx_msg.data[3] == 0x21)
+ 20c:	81 32       	cpi	r24, 0x21	; 33
+ 20e:	09 f0       	breq	.+2      	; 0x212 <main+0x192>
+ 210:	79 c0       	rjmp	.+242    	; 0x304 <main+0x284>
+                            {
+
+                                tx_msg.data[0] = 0x7;
+ 212:	bd 8a       	std	Y+21, r11	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 214:	ee 8a       	std	Y+22, r14	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 216:	3f 8a       	std	Y+23, r3	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 218:	88 8f       	std	Y+24, r24	; 0x18
+                                tx_msg.data[4] = '2';
+ 21a:	79 8e       	std	Y+25, r7	; 0x19
+                                tx_msg.data[5] = '7';
+ 21c:	5a 8e       	std	Y+26, r5	; 0x1a
+                                tx_msg.data[6] = '0';
+ 21e:	20 e3       	ldi	r18, 0x30	; 48
+ 220:	2b 8f       	std	Y+27, r18	; 0x1b
+                                tx_msg.data[7] = '4';
+ 222:	84 e3       	ldi	r24, 0x34	; 52
+ 224:	8c 8f       	std	Y+28, r24	; 0x1c
+                                can_send_message(&tx_msg);    
+ 226:	c6 01       	movw	r24, r12
+ 228:	52 d2       	rcall	.+1188   	; 0x6ce <can_send_message>
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+ 22a:	00 e2       	ldi	r16, 0x20	; 32
+ 22c:	1e e4       	ldi	r17, 0x4E	; 78
+ 22e:	c8 01       	movw	r24, r16
+ 230:	01 97       	sbiw	r24, 0x01	; 1
+ 232:	f1 f7       	brne	.-4      	; 0x230 <main+0x1b0>
+                                _delay_ms(5);
+
+                                tx_msg.data[0] = 0x7;
+ 234:	bd 8a       	std	Y+21, r11	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 236:	88 85       	ldd	r24, Y+8	; 0x08
+ 238:	80 5c       	subi	r24, 0xC0	; 192
+ 23a:	8e 8b       	std	Y+22, r24	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 23c:	89 85       	ldd	r24, Y+9	; 0x09
+ 23e:	8f 8b       	std	Y+23, r24	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 240:	8a 85       	ldd	r24, Y+10	; 0x0a
+ 242:	88 8f       	std	Y+24, r24	; 0x18
+                                tx_msg.data[4] = '8';
+ 244:	89 8e       	std	Y+25, r8	; 0x19
+                                tx_msg.data[5] = '7';
+ 246:	5a 8e       	std	Y+26, r5	; 0x1a
+                                tx_msg.data[6] = '6';
+ 248:	36 e3       	ldi	r19, 0x36	; 54
+ 24a:	f3 2e       	mov	r15, r19
+ 24c:	fb 8e       	std	Y+27, r15	; 0x1b
+                                tx_msg.data[7] = '2';
+ 24e:	7c 8e       	std	Y+28, r7	; 0x1c
+                                can_send_message(&tx_msg);    
+ 250:	c6 01       	movw	r24, r12
+ 252:	3d d2       	rcall	.+1146   	; 0x6ce <can_send_message>
+ 254:	c8 01       	movw	r24, r16
+ 256:	01 97       	sbiw	r24, 0x01	; 1
+ 258:	f1 f7       	brne	.-4      	; 0x256 <main+0x1d6>
+                                _delay_ms(5);
+
+                                tx_msg.data[0] = 0x7;
+ 25a:	bd 8a       	std	Y+21, r11	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 25c:	88 85       	ldd	r24, Y+8	; 0x08
+ 25e:	80 5c       	subi	r24, 0xC0	; 192
+ 260:	8e 8b       	std	Y+22, r24	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 262:	89 85       	ldd	r24, Y+9	; 0x09
+ 264:	8f 8b       	std	Y+23, r24	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 266:	8a 85       	ldd	r24, Y+10	; 0x0a
+ 268:	88 8f       	std	Y+24, r24	; 0x18
+                                tx_msg.data[4] = '6';
+ 26a:	f9 8e       	std	Y+25, r15	; 0x19
+                                tx_msg.data[5] = 0x00;
+ 26c:	1a 8e       	std	Y+26, r1	; 0x1a
+                                tx_msg.data[6] = 0x00;
+ 26e:	1b 8e       	std	Y+27, r1	; 0x1b
+                                tx_msg.data[7] = 0x00;
+ 270:	1c 8e       	std	Y+28, r1	; 0x1c
+                                can_send_message(&tx_msg);    
+ 272:	c6 01       	movw	r24, r12
+ 274:	2c d2       	rcall	.+1112   	; 0x6ce <can_send_message>
+ 276:	c8 01       	movw	r24, r16
+ 278:	01 97       	sbiw	r24, 0x01	; 1
+ 27a:	f1 f7       	brne	.-4      	; 0x278 <main+0x1f8>
+ 27c:	43 c0       	rjmp	.+134    	; 0x304 <main+0x284>
+                                _delay_ms(5);
+                            }
+                        }
+
+                        /* Send VIN */
+                        else if (rx_msg.data[2] ==  0xE3)
+ 27e:	93 3e       	cpi	r25, 0xE3	; 227
+ 280:	09 f0       	breq	.+2      	; 0x284 <main+0x204>
+ 282:	40 c0       	rjmp	.+128    	; 0x304 <main+0x284>
+                        {
+                            if (rx_msg.data[3] == 0x00)
+ 284:	8a 85       	ldd	r24, Y+10	; 0x0a
+ 286:	88 23       	and	r24, r24
+ 288:	51 f4       	brne	.+20     	; 0x29e <main+0x21e>
+                            {
+                                tx_msg.data[0] = 0x7;
+ 28a:	bd 8a       	std	Y+21, r11	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 28c:	ee 8a       	std	Y+22, r14	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 28e:	9f 8b       	std	Y+23, r25	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 290:	18 8e       	std	Y+24, r1	; 0x18
+                                tx_msg.data[4] = 0x00;
+ 292:	19 8e       	std	Y+25, r1	; 0x19
+                                tx_msg.data[5] = 0x00;
+ 294:	1a 8e       	std	Y+26, r1	; 0x1a
+                                tx_msg.data[6] = 0x00;
+ 296:	1b 8e       	std	Y+27, r1	; 0x1b
+                                tx_msg.data[7] = 'W';
+ 298:	27 e5       	ldi	r18, 0x57	; 87
+ 29a:	2c 8f       	std	Y+28, r18	; 0x1c
+ 29c:	31 c0       	rjmp	.+98     	; 0x300 <main+0x280>
+                                can_send_message(&tx_msg);    
+                            }
+                            else if (rx_msg.data[3] == 0x01)
+ 29e:	81 30       	cpi	r24, 0x01	; 1
+ 2a0:	59 f4       	brne	.+22     	; 0x2b8 <main+0x238>
+                            {
+                                tx_msg.data[0] = 0x7;
+ 2a2:	bd 8a       	std	Y+21, r11	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 2a4:	ee 8a       	std	Y+22, r14	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 2a6:	4f 8a       	std	Y+23, r4	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 2a8:	a8 8e       	std	Y+24, r10	; 0x18
+                                tx_msg.data[4] = 'F';
+ 2aa:	86 e4       	ldi	r24, 0x46	; 70
+ 2ac:	89 8f       	std	Y+25, r24	; 0x19
+                                tx_msg.data[5] = '0';
+ 2ae:	20 e3       	ldi	r18, 0x30	; 48
+ 2b0:	2a 8f       	std	Y+26, r18	; 0x1a
+                                tx_msg.data[6] = '5';
+ 2b2:	2b 8e       	std	Y+27, r2	; 0x1b
+                                tx_msg.data[7] = 'X';
+ 2b4:	88 e5       	ldi	r24, 0x58	; 88
+ 2b6:	9a cf       	rjmp	.-204    	; 0x1ec <main+0x16c>
+                                can_send_message(&tx_msg);    
+                            }
+                            else if (rx_msg.data[3] == 0x02)
+ 2b8:	82 30       	cpi	r24, 0x02	; 2
+ 2ba:	61 f4       	brne	.+24     	; 0x2d4 <main+0x254>
+                            {
+                                tx_msg.data[0] = 0x7;
+ 2bc:	bd 8a       	std	Y+21, r11	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 2be:	ee 8a       	std	Y+22, r14	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 2c0:	4f 8a       	std	Y+23, r4	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 2c2:	88 8f       	std	Y+24, r24	; 0x18
+                                tx_msg.data[4] = 'X';
+ 2c4:	28 e5       	ldi	r18, 0x58	; 88
+ 2c6:	29 8f       	std	Y+25, r18	; 0x19
+                                tx_msg.data[5] = 'G';
+ 2c8:	87 e4       	ldi	r24, 0x47	; 71
+ 2ca:	8a 8f       	std	Y+26, r24	; 0x1a
+                                tx_msg.data[6] = 'C';
+ 2cc:	23 e4       	ldi	r18, 0x43	; 67
+ 2ce:	2b 8f       	std	Y+27, r18	; 0x1b
+                                tx_msg.data[7] = 'D';
+ 2d0:	84 e4       	ldi	r24, 0x44	; 68
+ 2d2:	8c cf       	rjmp	.-232    	; 0x1ec <main+0x16c>
+                                can_send_message(&tx_msg);    
+                            }
+                            else if (rx_msg.data[3] == 0x03)
+ 2d4:	83 30       	cpi	r24, 0x03	; 3
+ 2d6:	51 f4       	brne	.+20     	; 0x2ec <main+0x26c>
+                            {
+                                tx_msg.data[0] = 0x7;
+ 2d8:	bd 8a       	std	Y+21, r11	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 2da:	ee 8a       	std	Y+22, r14	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 2dc:	4f 8a       	std	Y+23, r4	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 2de:	88 8f       	std	Y+24, r24	; 0x18
+                                tx_msg.data[4] = '5';
+ 2e0:	29 8e       	std	Y+25, r2	; 0x19
+                                tx_msg.data[5] = '7';
+ 2e2:	5a 8e       	std	Y+26, r5	; 0x1a
+                                tx_msg.data[6] = 'M';
+ 2e4:	2d e4       	ldi	r18, 0x4D	; 77
+ 2e6:	2b 8f       	std	Y+27, r18	; 0x1b
+                                tx_msg.data[7] = '2';
+ 2e8:	7c 8e       	std	Y+28, r7	; 0x1c
+ 2ea:	0a c0       	rjmp	.+20     	; 0x300 <main+0x280>
+                                can_send_message(&tx_msg);    
+                            }
+                            else if (rx_msg.data[3] == 0x04)
+ 2ec:	84 30       	cpi	r24, 0x04	; 4
+ 2ee:	51 f4       	brne	.+20     	; 0x304 <main+0x284>
+                            {
+                                tx_msg.data[0] = 0x7;
+ 2f0:	bd 8a       	std	Y+21, r11	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 2f2:	ee 8a       	std	Y+22, r14	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 2f4:	4f 8a       	std	Y+23, r4	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 2f6:	88 8f       	std	Y+24, r24	; 0x18
+                                tx_msg.data[4] = '2';
+ 2f8:	79 8e       	std	Y+25, r7	; 0x19
+                                tx_msg.data[5] = '8';
+ 2fa:	8a 8e       	std	Y+26, r8	; 0x1a
+                                tx_msg.data[6] = '8';
+ 2fc:	8b 8e       	std	Y+27, r8	; 0x1b
+                                tx_msg.data[7] = '8';
+ 2fe:	8c 8e       	std	Y+28, r8	; 0x1c
+                                can_send_message(&tx_msg);    
+ 300:	c6 01       	movw	r24, r12
+ 302:	e5 d1       	rcall	.+970    	; 0x6ce <can_send_message>
+                            }
+                        }
+
+                        if (rx_msg.data[2] == 0x18)
+ 304:	99 85       	ldd	r25, Y+9	; 0x09
+ 306:	98 31       	cpi	r25, 0x18	; 24
+ 308:	81 f4       	brne	.+32     	; 0x32a <main+0x2aa>
+                        {
+                            if (rx_msg.data[3] == 0x00)
+ 30a:	8a 85       	ldd	r24, Y+10	; 0x0a
+ 30c:	88 23       	and	r24, r24
+ 30e:	69 f4       	brne	.+26     	; 0x32a <main+0x2aa>
+                            {
+                                tx_msg.data[0] = 0x7;
+ 310:	bd 8a       	std	Y+21, r11	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 312:	88 85       	ldd	r24, Y+8	; 0x08
+ 314:	80 5c       	subi	r24, 0xC0	; 192
+ 316:	8e 8b       	std	Y+22, r24	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 318:	9f 8b       	std	Y+23, r25	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 31a:	18 8e       	std	Y+24, r1	; 0x18
+                                tx_msg.data[4] = 0xFF;
+ 31c:	8f ef       	ldi	r24, 0xFF	; 255
+ 31e:	89 8f       	std	Y+25, r24	; 0x19
+                                tx_msg.data[5] = 0x01;
+ 320:	aa 8e       	std	Y+26, r10	; 0x1a
+                                tx_msg.data[6] = 0x00;
+ 322:	1b 8e       	std	Y+27, r1	; 0x1b
+                                tx_msg.data[7] = 0x00;  
+ 324:	1c 8e       	std	Y+28, r1	; 0x1c
+                                can_send_message(&tx_msg);                              
+ 326:	c6 01       	movw	r24, r12
+ 328:	d2 d1       	rcall	.+932    	; 0x6ce <can_send_message>
+                        /* --- END OF VEHICLE AND ECU IDENTIFICATION --- */
+
+                        /* --- SENSOR DATA SENDING --- */
+        
+                        /* --- A/C Pressure Switch  ON/OFF --- */
+                        if (rx_msg.data[2] == 0x11)
+ 32a:	29 85       	ldd	r18, Y+9	; 0x09
+ 32c:	21 31       	cpi	r18, 0x11	; 17
+ 32e:	79 f4       	brne	.+30     	; 0x34e <main+0x2ce>
+                        {
+                            if (rx_msg.data[3] == 0x02)
+ 330:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 332:	92 30       	cpi	r25, 0x02	; 2
+ 334:	61 f4       	brne	.+24     	; 0x34e <main+0x2ce>
+                            {
+                                tx_msg.data[0] = 0x4;
+ 336:	9d 8a       	std	Y+21, r9	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 338:	88 85       	ldd	r24, Y+8	; 0x08
+ 33a:	80 5c       	subi	r24, 0xC0	; 192
+ 33c:	8e 8b       	std	Y+22, r24	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 33e:	2f 8b       	std	Y+23, r18	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 340:	98 8f       	std	Y+24, r25	; 0x18
+                                tx_msg.data[4] = 0x01;
+ 342:	a9 8e       	std	Y+25, r10	; 0x19
+                                tx_msg.data[5] = 0x00;
+ 344:	1a 8e       	std	Y+26, r1	; 0x1a
+                                tx_msg.data[6] = 0x00;
+ 346:	1b 8e       	std	Y+27, r1	; 0x1b
+                                tx_msg.data[7] = 0x00;
+ 348:	1c 8e       	std	Y+28, r1	; 0x1c
+                                can_send_message(&tx_msg);
+ 34a:	c6 01       	movw	r24, r12
+ 34c:	c0 d1       	rcall	.+896    	; 0x6ce <can_send_message>
+                            }
+                        }
+
+                        /* --- A/C Pressure Switch [V]  ---*/
+                        if (rx_msg.data[2] == 0x16)
+ 34e:	29 85       	ldd	r18, Y+9	; 0x09
+ 350:	26 31       	cpi	r18, 0x16	; 22
+ 352:	79 f4       	brne	.+30     	; 0x372 <main+0x2f2>
+                        {
+                            if (rx_msg.data[3] == 0x38)
+ 354:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 356:	98 33       	cpi	r25, 0x38	; 56
+ 358:	61 f4       	brne	.+24     	; 0x372 <main+0x2f2>
+                            {
+                                tx_msg.data[0] = 0x5;
+ 35a:	6d 8a       	std	Y+21, r6	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 35c:	88 85       	ldd	r24, Y+8	; 0x08
+ 35e:	80 5c       	subi	r24, 0xC0	; 192
+ 360:	8e 8b       	std	Y+22, r24	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 362:	2f 8b       	std	Y+23, r18	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 364:	98 8f       	std	Y+24, r25	; 0x18
+                                tx_msg.data[4] = 0x01;
+ 366:	a9 8e       	std	Y+25, r10	; 0x19
+                                tx_msg.data[5] = 0x00;
+ 368:	1a 8e       	std	Y+26, r1	; 0x1a
+                                tx_msg.data[6] = 0x00;
+ 36a:	1b 8e       	std	Y+27, r1	; 0x1b
+                                tx_msg.data[7] = 0x00;
+ 36c:	1c 8e       	std	Y+28, r1	; 0x1c
+                                can_send_message(&tx_msg);
+ 36e:	c6 01       	movw	r24, r12
+ 370:	ae d1       	rcall	.+860    	; 0x6ce <can_send_message>
+                            }
+                        }
+
+                        /* --- A/C Request Signal ON / OFF -- */
+                        if (rx_msg.data[2] == 0x11)
+ 372:	29 85       	ldd	r18, Y+9	; 0x09
+ 374:	21 31       	cpi	r18, 0x11	; 17
+ 376:	79 f4       	brne	.+30     	; 0x396 <main+0x316>
+                        {
+                            if (rx_msg.data[3] == 0x01)
+ 378:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 37a:	91 30       	cpi	r25, 0x01	; 1
+ 37c:	61 f4       	brne	.+24     	; 0x396 <main+0x316>
+                            {
+                                tx_msg.data[0] = 0x4;
+ 37e:	9d 8a       	std	Y+21, r9	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 380:	88 85       	ldd	r24, Y+8	; 0x08
+ 382:	80 5c       	subi	r24, 0xC0	; 192
+ 384:	8e 8b       	std	Y+22, r24	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 386:	2f 8b       	std	Y+23, r18	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 388:	98 8f       	std	Y+24, r25	; 0x18
+                                tx_msg.data[4] = 0x01;
+ 38a:	99 8f       	std	Y+25, r25	; 0x19
+                                tx_msg.data[5] = 0x00;
+ 38c:	1a 8e       	std	Y+26, r1	; 0x1a
+                                tx_msg.data[6] = 0x00;
+ 38e:	1b 8e       	std	Y+27, r1	; 0x1b
+                                tx_msg.data[7] = 0x00;
+ 390:	1c 8e       	std	Y+28, r1	; 0x1c
+                                can_send_message(&tx_msg);
+ 392:	c6 01       	movw	r24, r12
+ 394:	9c d1       	rcall	.+824    	; 0x6ce <can_send_message>
+                            }
+                        }
+
+
+                        /* --- ABS Yaw Rate Value  Deg / Second ---- */
+                        if (rx_msg.data[2] == 0xC9)
+ 396:	29 85       	ldd	r18, Y+9	; 0x09
+ 398:	29 3c       	cpi	r18, 0xC9	; 201
+ 39a:	79 f4       	brne	.+30     	; 0x3ba <main+0x33a>
+                        {
+                            if (rx_msg.data[3] == 0x10)
+ 39c:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 39e:	90 31       	cpi	r25, 0x10	; 16
+ 3a0:	61 f4       	brne	.+24     	; 0x3ba <main+0x33a>
+                            {
+                                tx_msg.data[0] = 0x5;
+ 3a2:	6d 8a       	std	Y+21, r6	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 3a4:	88 85       	ldd	r24, Y+8	; 0x08
+ 3a6:	80 5c       	subi	r24, 0xC0	; 192
+ 3a8:	8e 8b       	std	Y+22, r24	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 3aa:	2f 8b       	std	Y+23, r18	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 3ac:	98 8f       	std	Y+24, r25	; 0x18
+                                tx_msg.data[4] = 0x00;
+ 3ae:	19 8e       	std	Y+25, r1	; 0x19
+                                tx_msg.data[5] = 0x01;
+ 3b0:	aa 8e       	std	Y+26, r10	; 0x1a
+                                tx_msg.data[6] = 0x00;
+ 3b2:	1b 8e       	std	Y+27, r1	; 0x1b
+                                tx_msg.data[7] = 0x00;
+ 3b4:	1c 8e       	std	Y+28, r1	; 0x1c
+                                can_send_message(&tx_msg);
+ 3b6:	c6 01       	movw	r24, r12
+ 3b8:	8a d1       	rcall	.+788    	; 0x6ce <can_send_message>
+                            }
+                        }
+
+                        /* --- ACC Position --- */
+                        /* --- NB! for some reason always returning inactive --- */
+                        if (rx_msg.data[2] == 0xA4)
+ 3ba:	29 85       	ldd	r18, Y+9	; 0x09
+ 3bc:	24 3a       	cpi	r18, 0xA4	; 164
+ 3be:	79 f4       	brne	.+30     	; 0x3de <main+0x35e>
+                        {
+                            if (rx_msg.data[3] == 0x30)
+ 3c0:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 3c2:	90 33       	cpi	r25, 0x30	; 48
+ 3c4:	61 f4       	brne	.+24     	; 0x3de <main+0x35e>
+                            {
+                                tx_msg.data[0] = 0x4;
+ 3c6:	9d 8a       	std	Y+21, r9	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 3c8:	88 85       	ldd	r24, Y+8	; 0x08
+ 3ca:	80 5c       	subi	r24, 0xC0	; 192
+ 3cc:	8e 8b       	std	Y+22, r24	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 3ce:	2f 8b       	std	Y+23, r18	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 3d0:	98 8f       	std	Y+24, r25	; 0x18
+                                tx_msg.data[4] = 0x01;
+ 3d2:	a9 8e       	std	Y+25, r10	; 0x19
+                                tx_msg.data[5] = 0x00;
+ 3d4:	1a 8e       	std	Y+26, r1	; 0x1a
+                                tx_msg.data[6] = 0x00;
+ 3d6:	1b 8e       	std	Y+27, r1	; 0x1b
+                                tx_msg.data[7] = 0x00;
+ 3d8:	1c 8e       	std	Y+28, r1	; 0x1c
+                                can_send_message(&tx_msg);
+ 3da:	c6 01       	movw	r24, r12
+ 3dc:	78 d1       	rcall	.+752    	; 0x6ce <can_send_message>
+                            }
+                        }
+
+                        /* --- Accelerator Pedal Position [%] && Accelerator Pedal Position [V] --- */
+                        if (rx_msg.data[2] == 0x13)
+ 3de:	29 85       	ldd	r18, Y+9	; 0x09
+ 3e0:	23 31       	cpi	r18, 0x13	; 19
+ 3e2:	81 f4       	brne	.+32     	; 0x404 <main+0x384>
+                        {
+                            if (rx_msg.data[3] == 0x40)
+ 3e4:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 3e6:	90 34       	cpi	r25, 0x40	; 64
+ 3e8:	69 f4       	brne	.+26     	; 0x404 <main+0x384>
+                            {
+                                tx_msg.data[0] = 0x4;
+ 3ea:	9d 8a       	std	Y+21, r9	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 3ec:	88 85       	ldd	r24, Y+8	; 0x08
+ 3ee:	80 5c       	subi	r24, 0xC0	; 192
+ 3f0:	8e 8b       	std	Y+22, r24	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 3f2:	2f 8b       	std	Y+23, r18	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 3f4:	98 8f       	std	Y+24, r25	; 0x18
+                                tx_msg.data[4] = 0x1F;
+ 3f6:	2f e1       	ldi	r18, 0x1F	; 31
+ 3f8:	29 8f       	std	Y+25, r18	; 0x19
+                                tx_msg.data[5] = 0x00;
+ 3fa:	1a 8e       	std	Y+26, r1	; 0x1a
+                                tx_msg.data[6] = 0x00;
+ 3fc:	1b 8e       	std	Y+27, r1	; 0x1b
+                                tx_msg.data[7] = 0x00;
+ 3fe:	1c 8e       	std	Y+28, r1	; 0x1c
+                                can_send_message(&tx_msg);
+ 400:	c6 01       	movw	r24, r12
+ 402:	65 d1       	rcall	.+714    	; 0x6ce <can_send_message>
+                            }
+                        }
+
+                        /* --- Accelerator Pedal Possition Mode  --- */
+                        if (rx_msg.data[2] == 0x11)
+ 404:	29 85       	ldd	r18, Y+9	; 0x09
+ 406:	21 31       	cpi	r18, 0x11	; 17
+ 408:	79 f4       	brne	.+30     	; 0x428 <main+0x3a8>
+                        {
+                            if (rx_msg.data[3] == 0x25)
+ 40a:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 40c:	95 32       	cpi	r25, 0x25	; 37
+ 40e:	61 f4       	brne	.+24     	; 0x428 <main+0x3a8>
+                            {
+                                tx_msg.data[0] = 0x4;
+ 410:	9d 8a       	std	Y+21, r9	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 412:	88 85       	ldd	r24, Y+8	; 0x08
+ 414:	80 5c       	subi	r24, 0xC0	; 192
+ 416:	8e 8b       	std	Y+22, r24	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 418:	2f 8b       	std	Y+23, r18	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 41a:	98 8f       	std	Y+24, r25	; 0x18
+                                tx_msg.data[4] = 0x01;
+ 41c:	a9 8e       	std	Y+25, r10	; 0x19
+                                tx_msg.data[5] = 0x00;
+ 41e:	1a 8e       	std	Y+26, r1	; 0x1a
+                                tx_msg.data[6] = 0x00;
+ 420:	1b 8e       	std	Y+27, r1	; 0x1b
+                                tx_msg.data[7] = 0x00;
+ 422:	1c 8e       	std	Y+28, r1	; 0x1c
+                                can_send_message(&tx_msg);
+ 424:	c6 01       	movw	r24, r12
+ 426:	53 d1       	rcall	.+678    	; 0x6ce <can_send_message>
+                            }
+                        }
+
+                        /* --- Air Conditioning Clutch --- */
+                        if (rx_msg.data[2] == 0x11)
+ 428:	29 85       	ldd	r18, Y+9	; 0x09
+ 42a:	21 31       	cpi	r18, 0x11	; 17
+ 42c:	79 f4       	brne	.+30     	; 0x44c <main+0x3cc>
+                        {
+                            if (rx_msg.data[3] == 0x04)
+ 42e:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 430:	94 30       	cpi	r25, 0x04	; 4
+ 432:	61 f4       	brne	.+24     	; 0x44c <main+0x3cc>
+                            {
+                                tx_msg.data[0] = 0x4;
+ 434:	9d 8b       	std	Y+21, r25	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 436:	88 85       	ldd	r24, Y+8	; 0x08
+ 438:	80 5c       	subi	r24, 0xC0	; 192
+ 43a:	8e 8b       	std	Y+22, r24	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 43c:	2f 8b       	std	Y+23, r18	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 43e:	98 8f       	std	Y+24, r25	; 0x18
+                                tx_msg.data[4] = 0x01;
+ 440:	a9 8e       	std	Y+25, r10	; 0x19
+                                tx_msg.data[5] = 0x00;
+ 442:	1a 8e       	std	Y+26, r1	; 0x1a
+                                tx_msg.data[6] = 0x00;
+ 444:	1b 8e       	std	Y+27, r1	; 0x1b
+                                tx_msg.data[7] = 0x00;
+ 446:	1c 8e       	std	Y+28, r1	; 0x1c
+                                can_send_message(&tx_msg);
+ 448:	c6 01       	movw	r24, r12
+ 44a:	41 d1       	rcall	.+642    	; 0x6ce <can_send_message>
+                            }
+                        }
+
+                        /* --- ECT voltage value --- */
+                        if (rx_msg.data[2] == 0x11)
+ 44c:	29 85       	ldd	r18, Y+9	; 0x09
+ 44e:	21 31       	cpi	r18, 0x11	; 17
+ 450:	b1 f4       	brne	.+44     	; 0x47e <__stack+0x1f>
+                        {
+                            if (rx_msg.data[3] == 0x4D)
+ 452:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 454:	9d 34       	cpi	r25, 0x4D	; 77
+ 456:	99 f4       	brne	.+38     	; 0x47e <__stack+0x1f>
+                            {
+                                tx_msg.data[0] = 0x5;
+ 458:	6d 8a       	std	Y+21, r6	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 45a:	88 85       	ldd	r24, Y+8	; 0x08
+ 45c:	80 5c       	subi	r24, 0xC0	; 192
+ 45e:	8e 8b       	std	Y+22, r24	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 460:	2f 8b       	std	Y+23, r18	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 462:	98 8f       	std	Y+24, r25	; 0x18
+                                tx_msg.data[4] = ect_voltage & 0xFF;
+ 464:	80 91 60 00 	lds	r24, 0x0060
+ 468:	90 91 61 00 	lds	r25, 0x0061
+ 46c:	89 8f       	std	Y+25, r24	; 0x19
+                                tx_msg.data[5] = ect_voltage >> 8;
+ 46e:	89 2f       	mov	r24, r25
+ 470:	99 0f       	add	r25, r25
+ 472:	99 0b       	sbc	r25, r25
+ 474:	8a 8f       	std	Y+26, r24	; 0x1a
+                                tx_msg.data[6] = 0x00;
+ 476:	1b 8e       	std	Y+27, r1	; 0x1b
+                                tx_msg.data[7] = 0x00;
+ 478:	1c 8e       	std	Y+28, r1	; 0x1c
+                                can_send_message(&tx_msg);
+ 47a:	c6 01       	movw	r24, r12
+ 47c:	28 d1       	rcall	.+592    	; 0x6ce <can_send_message>
+                            }
+                        }
+
+                        /* --- ECT temperature value 0x28 = 0°C --- */
+                        if (rx_msg.data[2] == 0x00)
+ 47e:	89 85       	ldd	r24, Y+9	; 0x09
+ 480:	88 23       	and	r24, r24
+ 482:	91 f4       	brne	.+36     	; 0x4a8 <__stack+0x49>
+                        {
+                            if (rx_msg.data[3] == 0x05)
+ 484:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 486:	95 30       	cpi	r25, 0x05	; 5
+ 488:	79 f4       	brne	.+30     	; 0x4a8 <__stack+0x49>
+                            {
+                                tx_msg.data[0] = 0x4;
+ 48a:	9d 8a       	std	Y+21, r9	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 48c:	88 85       	ldd	r24, Y+8	; 0x08
+ 48e:	80 5c       	subi	r24, 0xC0	; 192
+ 490:	8e 8b       	std	Y+22, r24	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 492:	1f 8a       	std	Y+23, r1	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 494:	98 8f       	std	Y+24, r25	; 0x18
+                                tx_msg.data[4] = ect_temperature + 40;
+ 496:	80 91 62 00 	lds	r24, 0x0062
+ 49a:	88 5d       	subi	r24, 0xD8	; 216
+ 49c:	89 8f       	std	Y+25, r24	; 0x19
+                                tx_msg.data[5] = 0x00;
+ 49e:	1a 8e       	std	Y+26, r1	; 0x1a
+                                tx_msg.data[6] = 0x00;
+ 4a0:	1b 8e       	std	Y+27, r1	; 0x1b
+                                tx_msg.data[7] = 0x00;
+ 4a2:	1c 8e       	std	Y+28, r1	; 0x1c
+                                can_send_message(&tx_msg);
+ 4a4:	c6 01       	movw	r24, r12
+ 4a6:	13 d1       	rcall	.+550    	; 0x6ce <can_send_message>
+                            }
+                        }
+
+                        /* --- FAN speed ---- */
+                        if (rx_msg.data[2] == 0x16)
+ 4a8:	29 85       	ldd	r18, Y+9	; 0x09
+ 4aa:	26 31       	cpi	r18, 0x16	; 22
+ 4ac:	89 f4       	brne	.+34     	; 0x4d0 <__stack+0x71>
+                        {
+                            if (rx_msg.data[3] == 0xAA)
+ 4ae:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 4b0:	9a 3a       	cpi	r25, 0xAA	; 170
+ 4b2:	71 f4       	brne	.+28     	; 0x4d0 <__stack+0x71>
+                            {
+                                tx_msg.data[0] = 0x4;
+ 4b4:	9d 8a       	std	Y+21, r9	; 0x15
+                                tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 4b6:	88 85       	ldd	r24, Y+8	; 0x08
+ 4b8:	80 5c       	subi	r24, 0xC0	; 192
+ 4ba:	8e 8b       	std	Y+22, r24	; 0x16
+                                tx_msg.data[2] = rx_msg.data[2];
+ 4bc:	2f 8b       	std	Y+23, r18	; 0x17
+                                tx_msg.data[3] = rx_msg.data[3];
+ 4be:	98 8f       	std	Y+24, r25	; 0x18
+                                tx_msg.data[4] = engine_fan_speed;
+ 4c0:	80 91 64 00 	lds	r24, 0x0064
+ 4c4:	89 8f       	std	Y+25, r24	; 0x19
+                                tx_msg.data[5] = 0x00;
+ 4c6:	1a 8e       	std	Y+26, r1	; 0x1a
+                                tx_msg.data[6] = 0x00;
+ 4c8:	1b 8e       	std	Y+27, r1	; 0x1b
+                                tx_msg.data[7] = 0x00;
+ 4ca:	1c 8e       	std	Y+28, r1	; 0x1c
+                                can_send_message(&tx_msg);
+ 4cc:	c6 01       	movw	r24, r12
+ 4ce:	ff d0       	rcall	.+510    	; 0x6ce <can_send_message>
+                        }
+                    }
+
+                    /* --- TROUBLE CODES --- */
+
+                    if (rx_msg.data[1] == 0x18)
+ 4d0:	88 85       	ldd	r24, Y+8	; 0x08
+ 4d2:	88 31       	cpi	r24, 0x18	; 24
+ 4d4:	09 f0       	breq	.+2      	; 0x4d8 <__stack+0x79>
+ 4d6:	23 ce       	rjmp	.-954    	; 0x11e <main+0x9e>
+                    {
+                        /* sending P0210 code */
+                        tx_msg.data[0] = 0x05;
+ 4d8:	6d 8a       	std	Y+21, r6	; 0x15
+                        tx_msg.data[1] = rx_msg.data[1] + 0x40;
+ 4da:	88 e5       	ldi	r24, 0x58	; 88
+ 4dc:	8e 8b       	std	Y+22, r24	; 0x16
+                        tx_msg.data[2] = 0x01;  // number of error codes
+ 4de:	af 8a       	std	Y+23, r10	; 0x17
+                        tx_msg.data[3] = 0x00;  // first part of error code
+ 4e0:	18 8e       	std	Y+24, r1	; 0x18
+                        tx_msg.data[4] = 0x10;  // second part of error code ... the code is P0010
+ 4e2:	20 e1       	ldi	r18, 0x10	; 16
+ 4e4:	29 8f       	std	Y+25, r18	; 0x19
+                        tx_msg.data[5] = 0xff;  // end of error codes 
+ 4e6:	8f ef       	ldi	r24, 0xFF	; 255
+ 4e8:	8a 8f       	std	Y+26, r24	; 0x1a
+                        tx_msg.data[6] = 0x00;
+ 4ea:	1b 8e       	std	Y+27, r1	; 0x1b
+                        tx_msg.data[7] = 0x00;
+ 4ec:	1c 8e       	std	Y+28, r1	; 0x1c
+                        can_send_message(&tx_msg);
+ 4ee:	c6 01       	movw	r24, r12
+ 4f0:	ee d0       	rcall	.+476    	; 0x6ce <can_send_message>
+ 4f2:	15 ce       	rjmp	.-982    	; 0x11e <main+0x9e>
+
+000004f4 <mcp2515_read_status>:
+ 4f4:	c2 98       	cbi	0x18, 2	; 24
+ 4f6:	ed d1       	rcall	.+986    	; 0x8d2 <spi_putc>
+ 4f8:	8f ef       	ldi	r24, 0xFF	; 255
+ 4fa:	eb d1       	rcall	.+982    	; 0x8d2 <spi_putc>
+ 4fc:	c2 9a       	sbi	0x18, 2	; 24
+ 4fe:	08 95       	ret
+
+00000500 <mcp2515_bit_modify>:
+ 500:	ff 92       	push	r15
+ 502:	0f 93       	push	r16
+ 504:	1f 93       	push	r17
+ 506:	18 2f       	mov	r17, r24
+ 508:	06 2f       	mov	r16, r22
+ 50a:	f4 2e       	mov	r15, r20
+ 50c:	c2 98       	cbi	0x18, 2	; 24
+ 50e:	85 e0       	ldi	r24, 0x05	; 5
+ 510:	e0 d1       	rcall	.+960    	; 0x8d2 <spi_putc>
+ 512:	81 2f       	mov	r24, r17
+ 514:	de d1       	rcall	.+956    	; 0x8d2 <spi_putc>
+ 516:	80 2f       	mov	r24, r16
+ 518:	dc d1       	rcall	.+952    	; 0x8d2 <spi_putc>
+ 51a:	8f 2d       	mov	r24, r15
+ 51c:	da d1       	rcall	.+948    	; 0x8d2 <spi_putc>
+ 51e:	c2 9a       	sbi	0x18, 2	; 24
+ 520:	1f 91       	pop	r17
+ 522:	0f 91       	pop	r16
+ 524:	ff 90       	pop	r15
+ 526:	08 95       	ret
+
+00000528 <mcp2515_read_register>:
+ 528:	1f 93       	push	r17
+ 52a:	18 2f       	mov	r17, r24
+ 52c:	c2 98       	cbi	0x18, 2	; 24
+ 52e:	83 e0       	ldi	r24, 0x03	; 3
+ 530:	d0 d1       	rcall	.+928    	; 0x8d2 <spi_putc>
+ 532:	81 2f       	mov	r24, r17
+ 534:	ce d1       	rcall	.+924    	; 0x8d2 <spi_putc>
+ 536:	8f ef       	ldi	r24, 0xFF	; 255
+ 538:	cc d1       	rcall	.+920    	; 0x8d2 <spi_putc>
+ 53a:	c2 9a       	sbi	0x18, 2	; 24
+ 53c:	1f 91       	pop	r17
+ 53e:	08 95       	ret
+
+00000540 <mcp2515_write_register>:
+ 540:	0f 93       	push	r16
+ 542:	1f 93       	push	r17
+ 544:	18 2f       	mov	r17, r24
+ 546:	06 2f       	mov	r16, r22
+ 548:	c2 98       	cbi	0x18, 2	; 24
+ 54a:	82 e0       	ldi	r24, 0x02	; 2
+ 54c:	c2 d1       	rcall	.+900    	; 0x8d2 <spi_putc>
+ 54e:	81 2f       	mov	r24, r17
+ 550:	c0 d1       	rcall	.+896    	; 0x8d2 <spi_putc>
+ 552:	80 2f       	mov	r24, r16
+ 554:	be d1       	rcall	.+892    	; 0x8d2 <spi_putc>
+ 556:	c2 9a       	sbi	0x18, 2	; 24
+ 558:	1f 91       	pop	r17
+ 55a:	0f 91       	pop	r16
+ 55c:	08 95       	ret
+
+0000055e <can_init>:
+ 55e:	0f 93       	push	r16
+ 560:	1f 93       	push	r17
+ 562:	cf 93       	push	r28
+ 564:	df 93       	push	r29
+ 566:	18 2f       	mov	r17, r24
+ 568:	88 30       	cpi	r24, 0x08	; 8
+ 56a:	08 f0       	brcs	.+2      	; 0x56e <can_init+0x10>
+ 56c:	48 c0       	rjmp	.+144    	; 0x5fe <can_init+0xa0>
+ 56e:	c2 9a       	sbi	0x18, 2	; 24
+ 570:	ba 9a       	sbi	0x17, 2	; 23
+ 572:	c5 98       	cbi	0x18, 5	; 24
+ 574:	c3 98       	cbi	0x18, 3	; 24
+ 576:	c4 98       	cbi	0x18, 4	; 24
+ 578:	bd 9a       	sbi	0x17, 5	; 23
+ 57a:	bb 9a       	sbi	0x17, 3	; 23
+ 57c:	bc 98       	cbi	0x17, 4	; 23
+ 57e:	a4 d1       	rcall	.+840    	; 0x8c8 <mcp2515_spi_init>
+ 580:	c2 98       	cbi	0x18, 2	; 24
+ 582:	80 ec       	ldi	r24, 0xC0	; 192
+ 584:	a6 d1       	rcall	.+844    	; 0x8d2 <spi_putc>
+ 586:	80 ea       	ldi	r24, 0xA0	; 160
+ 588:	9f e0       	ldi	r25, 0x0F	; 15
+ 58a:	01 97       	sbiw	r24, 0x01	; 1
+ 58c:	f1 f7       	brne	.-4      	; 0x58a <can_init+0x2c>
+ 58e:	c2 9a       	sbi	0x18, 2	; 24
+ 590:	80 e4       	ldi	r24, 0x40	; 64
+ 592:	9c e9       	ldi	r25, 0x9C	; 156
+ 594:	01 97       	sbiw	r24, 0x01	; 1
+ 596:	f1 f7       	brne	.-4      	; 0x594 <can_init+0x36>
+ 598:	c2 98       	cbi	0x18, 2	; 24
+ 59a:	82 e0       	ldi	r24, 0x02	; 2
+ 59c:	9a d1       	rcall	.+820    	; 0x8d2 <spi_putc>
+ 59e:	88 e2       	ldi	r24, 0x28	; 40
+ 5a0:	98 d1       	rcall	.+816    	; 0x8d2 <spi_putc>
+ 5a2:	e3 e0       	ldi	r30, 0x03	; 3
+ 5a4:	1e 9f       	mul	r17, r30
+ 5a6:	e0 01       	movw	r28, r0
+ 5a8:	11 24       	eor	r1, r1
+ 5aa:	fe 01       	movw	r30, r28
+ 5ac:	ea 5b       	subi	r30, 0xBA	; 186
+ 5ae:	ff 4f       	sbci	r31, 0xFF	; 255
+ 5b0:	e4 91       	lpm	r30, Z+
+ 5b2:	8e 2f       	mov	r24, r30
+ 5b4:	8e d1       	rcall	.+796    	; 0x8d2 <spi_putc>
+ 5b6:	fe 01       	movw	r30, r28
+ 5b8:	e9 5b       	subi	r30, 0xB9	; 185
+ 5ba:	ff 4f       	sbci	r31, 0xFF	; 255
+ 5bc:	04 91       	lpm	r16, Z+
+ 5be:	80 2f       	mov	r24, r16
+ 5c0:	88 d1       	rcall	.+784    	; 0x8d2 <spi_putc>
+ 5c2:	c8 5b       	subi	r28, 0xB8	; 184
+ 5c4:	df 4f       	sbci	r29, 0xFF	; 255
+ 5c6:	fe 01       	movw	r30, r28
+ 5c8:	84 91       	lpm	r24, Z+
+ 5ca:	83 d1       	rcall	.+774    	; 0x8d2 <spi_putc>
+ 5cc:	83 e0       	ldi	r24, 0x03	; 3
+ 5ce:	81 d1       	rcall	.+770    	; 0x8d2 <spi_putc>
+ 5d0:	c2 9a       	sbi	0x18, 2	; 24
+ 5d2:	8d e0       	ldi	r24, 0x0D	; 13
+ 5d4:	60 e0       	ldi	r22, 0x00	; 0
+ 5d6:	b4 df       	rcall	.-152    	; 0x540 <mcp2515_write_register>
+ 5d8:	b8 98       	cbi	0x17, 0	; 23
+ 5da:	c0 9a       	sbi	0x18, 0	; 24
+ 5dc:	8c e0       	ldi	r24, 0x0C	; 12
+ 5de:	60 e0       	ldi	r22, 0x00	; 0
+ 5e0:	af df       	rcall	.-162    	; 0x540 <mcp2515_write_register>
+ 5e2:	89 e2       	ldi	r24, 0x29	; 41
+ 5e4:	a1 df       	rcall	.-190    	; 0x528 <mcp2515_read_register>
+ 5e6:	18 2f       	mov	r17, r24
+ 5e8:	8f e0       	ldi	r24, 0x0F	; 15
+ 5ea:	60 e0       	ldi	r22, 0x00	; 0
+ 5ec:	a9 df       	rcall	.-174    	; 0x540 <mcp2515_write_register>
+ 5ee:	10 17       	cp	r17, r16
+ 5f0:	31 f4       	brne	.+12     	; 0x5fe <can_init+0xa0>
+ 5f2:	8e e0       	ldi	r24, 0x0E	; 14
+ 5f4:	99 df       	rcall	.-206    	; 0x528 <mcp2515_read_register>
+ 5f6:	80 7e       	andi	r24, 0xE0	; 224
+ 5f8:	e1 f7       	brne	.-8      	; 0x5f2 <can_init+0x94>
+ 5fa:	81 e0       	ldi	r24, 0x01	; 1
+ 5fc:	01 c0       	rjmp	.+2      	; 0x600 <can_init+0xa2>
+ 5fe:	80 e0       	ldi	r24, 0x00	; 0
+ 600:	df 91       	pop	r29
+ 602:	cf 91       	pop	r28
+ 604:	1f 91       	pop	r17
+ 606:	0f 91       	pop	r16
+ 608:	08 95       	ret
+
+0000060a <can_check_message>:
+ 60a:	86 b3       	in	r24, 0x16	; 22
+ 60c:	80 95       	com	r24
+ 60e:	81 70       	andi	r24, 0x01	; 1
+ 610:	08 95       	ret
+
+00000612 <can_check_free_buffer>:
+ 612:	80 ea       	ldi	r24, 0xA0	; 160
+ 614:	6f df       	rcall	.-290    	; 0x4f4 <mcp2515_read_status>
+ 616:	90 e0       	ldi	r25, 0x00	; 0
+ 618:	84 75       	andi	r24, 0x54	; 84
+ 61a:	84 35       	cpi	r24, 0x54	; 84
+ 61c:	09 f0       	breq	.+2      	; 0x620 <can_check_free_buffer+0xe>
+ 61e:	91 e0       	ldi	r25, 0x01	; 1
+ 620:	89 2f       	mov	r24, r25
+ 622:	08 95       	ret
+
+00000624 <can_get_message>:
+ 624:	cf 92       	push	r12
+ 626:	df 92       	push	r13
+ 628:	ff 92       	push	r15
+ 62a:	0f 93       	push	r16
+ 62c:	1f 93       	push	r17
+ 62e:	cf 93       	push	r28
+ 630:	df 93       	push	r29
+ 632:	ec 01       	movw	r28, r24
+ 634:	80 eb       	ldi	r24, 0xB0	; 176
+ 636:	5e df       	rcall	.-324    	; 0x4f4 <mcp2515_read_status>
+ 638:	f8 2e       	mov	r15, r24
+ 63a:	08 2f       	mov	r16, r24
+ 63c:	10 e0       	ldi	r17, 0x00	; 0
+ 63e:	20 e4       	ldi	r18, 0x40	; 64
+ 640:	c2 2e       	mov	r12, r18
+ 642:	d1 2c       	mov	r13, r1
+ 644:	c0 22       	and	r12, r16
+ 646:	d1 22       	and	r13, r17
+ 648:	86 ff       	sbrs	r24, 6
+ 64a:	02 c0       	rjmp	.+4      	; 0x650 <can_get_message+0x2c>
+ 64c:	80 e9       	ldi	r24, 0x90	; 144
+ 64e:	05 c0       	rjmp	.+10     	; 0x65a <can_get_message+0x36>
+ 650:	87 fd       	sbrc	r24, 7
+ 652:	02 c0       	rjmp	.+4      	; 0x658 <can_get_message+0x34>
+ 654:	80 e0       	ldi	r24, 0x00	; 0
+ 656:	33 c0       	rjmp	.+102    	; 0x6be <can_get_message+0x9a>
+ 658:	84 e9       	ldi	r24, 0x94	; 148
+ 65a:	c2 98       	cbi	0x18, 2	; 24
+ 65c:	3a d1       	rcall	.+628    	; 0x8d2 <spi_putc>
+ 65e:	ce 01       	movw	r24, r28
+ 660:	e8 d0       	rcall	.+464    	; 0x832 <mcp2515_read_id>
+ 662:	81 70       	andi	r24, 0x01	; 1
+ 664:	88 0f       	add	r24, r24
+ 666:	9c 81       	ldd	r25, Y+4	; 0x04
+ 668:	9d 7f       	andi	r25, 0xFD	; 253
+ 66a:	98 2b       	or	r25, r24
+ 66c:	9c 83       	std	Y+4, r25	; 0x04
+ 66e:	8f ef       	ldi	r24, 0xFF	; 255
+ 670:	30 d1       	rcall	.+608    	; 0x8d2 <spi_putc>
+ 672:	93 e0       	ldi	r25, 0x03	; 3
+ 674:	16 95       	lsr	r17
+ 676:	07 95       	ror	r16
+ 678:	9a 95       	dec	r25
+ 67a:	e1 f7       	brne	.-8      	; 0x674 <can_get_message+0x50>
+ 67c:	20 2f       	mov	r18, r16
+ 67e:	21 70       	andi	r18, 0x01	; 1
+ 680:	9c 81       	ldd	r25, Y+4	; 0x04
+ 682:	9e 7f       	andi	r25, 0xFE	; 254
+ 684:	92 2b       	or	r25, r18
+ 686:	9c 83       	std	Y+4, r25	; 0x04
+ 688:	08 2f       	mov	r16, r24
+ 68a:	0f 70       	andi	r16, 0x0F	; 15
+ 68c:	0d 83       	std	Y+5, r16	; 0x05
+ 68e:	10 e0       	ldi	r17, 0x00	; 0
+ 690:	07 c0       	rjmp	.+14     	; 0x6a0 <can_get_message+0x7c>
+ 692:	8f ef       	ldi	r24, 0xFF	; 255
+ 694:	1e d1       	rcall	.+572    	; 0x8d2 <spi_putc>
+ 696:	fe 01       	movw	r30, r28
+ 698:	e1 0f       	add	r30, r17
+ 69a:	f1 1d       	adc	r31, r1
+ 69c:	86 83       	std	Z+6, r24	; 0x06
+ 69e:	1f 5f       	subi	r17, 0xFF	; 255
+ 6a0:	10 17       	cp	r17, r16
+ 6a2:	b8 f3       	brcs	.-18     	; 0x692 <can_get_message+0x6e>
+ 6a4:	c2 9a       	sbi	0x18, 2	; 24
+ 6a6:	cd 28       	or	r12, r13
+ 6a8:	19 f0       	breq	.+6      	; 0x6b0 <can_get_message+0x8c>
+ 6aa:	8c e2       	ldi	r24, 0x2C	; 44
+ 6ac:	61 e0       	ldi	r22, 0x01	; 1
+ 6ae:	02 c0       	rjmp	.+4      	; 0x6b4 <can_get_message+0x90>
+ 6b0:	8c e2       	ldi	r24, 0x2C	; 44
+ 6b2:	62 e0       	ldi	r22, 0x02	; 2
+ 6b4:	40 e0       	ldi	r20, 0x00	; 0
+ 6b6:	24 df       	rcall	.-440    	; 0x500 <mcp2515_bit_modify>
+ 6b8:	8f 2d       	mov	r24, r15
+ 6ba:	87 70       	andi	r24, 0x07	; 7
+ 6bc:	8f 5f       	subi	r24, 0xFF	; 255
+ 6be:	df 91       	pop	r29
+ 6c0:	cf 91       	pop	r28
+ 6c2:	1f 91       	pop	r17
+ 6c4:	0f 91       	pop	r16
+ 6c6:	ff 90       	pop	r15
+ 6c8:	df 90       	pop	r13
+ 6ca:	cf 90       	pop	r12
+ 6cc:	08 95       	ret
+
+000006ce <can_send_message>:
+ 6ce:	ff 92       	push	r15
+ 6d0:	0f 93       	push	r16
+ 6d2:	1f 93       	push	r17
+ 6d4:	cf 93       	push	r28
+ 6d6:	df 93       	push	r29
+ 6d8:	ec 01       	movw	r28, r24
+ 6da:	80 ea       	ldi	r24, 0xA0	; 160
+ 6dc:	0b df       	rcall	.-490    	; 0x4f4 <mcp2515_read_status>
+ 6de:	82 fd       	sbrc	r24, 2
+ 6e0:	02 c0       	rjmp	.+4      	; 0x6e6 <can_send_message+0x18>
+ 6e2:	ff 24       	eor	r15, r15
+ 6e4:	0b c0       	rjmp	.+22     	; 0x6fc <can_send_message+0x2e>
+ 6e6:	84 fd       	sbrc	r24, 4
+ 6e8:	03 c0       	rjmp	.+6      	; 0x6f0 <can_send_message+0x22>
+ 6ea:	92 e0       	ldi	r25, 0x02	; 2
+ 6ec:	f9 2e       	mov	r15, r25
+ 6ee:	06 c0       	rjmp	.+12     	; 0x6fc <can_send_message+0x2e>
+ 6f0:	86 ff       	sbrs	r24, 6
+ 6f2:	02 c0       	rjmp	.+4      	; 0x6f8 <can_send_message+0x2a>
+ 6f4:	ff 24       	eor	r15, r15
+ 6f6:	2d c0       	rjmp	.+90     	; 0x752 <can_send_message+0x84>
+ 6f8:	84 e0       	ldi	r24, 0x04	; 4
+ 6fa:	f8 2e       	mov	r15, r24
+ 6fc:	c2 98       	cbi	0x18, 2	; 24
+ 6fe:	8f 2d       	mov	r24, r15
+ 700:	80 64       	ori	r24, 0x40	; 64
+ 702:	e7 d0       	rcall	.+462    	; 0x8d2 <spi_putc>
+ 704:	6c 81       	ldd	r22, Y+4	; 0x04
+ 706:	66 95       	lsr	r22
+ 708:	61 70       	andi	r22, 0x01	; 1
+ 70a:	ce 01       	movw	r24, r28
+ 70c:	5d d0       	rcall	.+186    	; 0x7c8 <mcp2515_write_id>
+ 70e:	0d 81       	ldd	r16, Y+5	; 0x05
+ 710:	0f 70       	andi	r16, 0x0F	; 15
+ 712:	8c 81       	ldd	r24, Y+4	; 0x04
+ 714:	80 ff       	sbrs	r24, 0
+ 716:	04 c0       	rjmp	.+8      	; 0x720 <can_send_message+0x52>
+ 718:	80 2f       	mov	r24, r16
+ 71a:	80 64       	ori	r24, 0x40	; 64
+ 71c:	da d0       	rcall	.+436    	; 0x8d2 <spi_putc>
+ 71e:	0c c0       	rjmp	.+24     	; 0x738 <can_send_message+0x6a>
+ 720:	80 2f       	mov	r24, r16
+ 722:	d7 d0       	rcall	.+430    	; 0x8d2 <spi_putc>
+ 724:	10 e0       	ldi	r17, 0x00	; 0
+ 726:	06 c0       	rjmp	.+12     	; 0x734 <can_send_message+0x66>
+ 728:	fe 01       	movw	r30, r28
+ 72a:	e1 0f       	add	r30, r17
+ 72c:	f1 1d       	adc	r31, r1
+ 72e:	86 81       	ldd	r24, Z+6	; 0x06
+ 730:	d0 d0       	rcall	.+416    	; 0x8d2 <spi_putc>
+ 732:	1f 5f       	subi	r17, 0xFF	; 255
+ 734:	10 17       	cp	r17, r16
+ 736:	c0 f3       	brcs	.-16     	; 0x728 <can_send_message+0x5a>
+ 738:	c2 9a       	sbi	0x18, 2	; 24
+    can be achieved.
+*/
+void
+_delay_loop_1(uint8_t __count)
+{
+	__asm__ volatile (
+ 73a:	85 e0       	ldi	r24, 0x05	; 5
+ 73c:	8a 95       	dec	r24
+ 73e:	f1 f7       	brne	.-4      	; 0x73c <can_send_message+0x6e>
+ 740:	c2 98       	cbi	0x18, 2	; 24
+ 742:	ff 20       	and	r15, r15
+ 744:	11 f4       	brne	.+4      	; 0x74a <can_send_message+0x7c>
+ 746:	ff 24       	eor	r15, r15
+ 748:	f3 94       	inc	r15
+ 74a:	8f 2d       	mov	r24, r15
+ 74c:	80 68       	ori	r24, 0x80	; 128
+ 74e:	c1 d0       	rcall	.+386    	; 0x8d2 <spi_putc>
+ 750:	c2 9a       	sbi	0x18, 2	; 24
+ 752:	8f 2d       	mov	r24, r15
+ 754:	df 91       	pop	r29
+ 756:	cf 91       	pop	r28
+ 758:	1f 91       	pop	r17
+ 75a:	0f 91       	pop	r16
+ 75c:	ff 90       	pop	r15
+ 75e:	08 95       	ret
+
+00000760 <can_static_filter>:
+ 760:	0f 93       	push	r16
+ 762:	1f 93       	push	r17
+ 764:	cf 93       	push	r28
+ 766:	df 93       	push	r29
+ 768:	ec 01       	movw	r28, r24
+ 76a:	8f e0       	ldi	r24, 0x0F	; 15
+ 76c:	60 ee       	ldi	r22, 0xE0	; 224
+ 76e:	40 e8       	ldi	r20, 0x80	; 128
+ 770:	c7 de       	rcall	.-626    	; 0x500 <mcp2515_bit_modify>
+ 772:	8e e0       	ldi	r24, 0x0E	; 14
+ 774:	d9 de       	rcall	.-590    	; 0x528 <mcp2515_read_register>
+ 776:	80 7e       	andi	r24, 0xE0	; 224
+ 778:	80 38       	cpi	r24, 0x80	; 128
+ 77a:	d9 f7       	brne	.-10     	; 0x772 <can_static_filter+0x12>
+ 77c:	80 e6       	ldi	r24, 0x60	; 96
+ 77e:	64 e0       	ldi	r22, 0x04	; 4
+ 780:	df de       	rcall	.-578    	; 0x540 <mcp2515_write_register>
+ 782:	80 e7       	ldi	r24, 0x70	; 112
+ 784:	60 e0       	ldi	r22, 0x00	; 0
+ 786:	dc de       	rcall	.-584    	; 0x540 <mcp2515_write_register>
+ 788:	00 e0       	ldi	r16, 0x00	; 0
+ 78a:	c2 98       	cbi	0x18, 2	; 24
+ 78c:	82 e0       	ldi	r24, 0x02	; 2
+ 78e:	a1 d0       	rcall	.+322    	; 0x8d2 <spi_putc>
+ 790:	80 2f       	mov	r24, r16
+ 792:	9f d0       	rcall	.+318    	; 0x8d2 <spi_putc>
+ 794:	10 e0       	ldi	r17, 0x00	; 0
+ 796:	00 32       	cpi	r16, 0x20	; 32
+ 798:	11 f4       	brne	.+4      	; 0x79e <can_static_filter+0x3e>
+ 79a:	18 30       	cpi	r17, 0x08	; 8
+ 79c:	40 f4       	brcc	.+16     	; 0x7ae <can_static_filter+0x4e>
+ 79e:	fe 01       	movw	r30, r28
+ 7a0:	21 96       	adiw	r28, 0x01	; 1
+ 7a2:	e4 91       	lpm	r30, Z+
+ 7a4:	8e 2f       	mov	r24, r30
+ 7a6:	95 d0       	rcall	.+298    	; 0x8d2 <spi_putc>
+ 7a8:	1f 5f       	subi	r17, 0xFF	; 255
+ 7aa:	1c 30       	cpi	r17, 0x0C	; 12
+ 7ac:	a1 f7       	brne	.-24     	; 0x796 <can_static_filter+0x36>
+ 7ae:	c2 9a       	sbi	0x18, 2	; 24
+ 7b0:	00 5f       	subi	r16, 0xF0	; 240
+ 7b2:	00 33       	cpi	r16, 0x30	; 48
+ 7b4:	51 f7       	brne	.-44     	; 0x78a <can_static_filter+0x2a>
+ 7b6:	8f e0       	ldi	r24, 0x0F	; 15
+ 7b8:	60 ee       	ldi	r22, 0xE0	; 224
+ 7ba:	40 e0       	ldi	r20, 0x00	; 0
+ 7bc:	a1 de       	rcall	.-702    	; 0x500 <mcp2515_bit_modify>
+ 7be:	df 91       	pop	r29
+ 7c0:	cf 91       	pop	r28
+ 7c2:	1f 91       	pop	r17
+ 7c4:	0f 91       	pop	r16
+ 7c6:	08 95       	ret
+
+000007c8 <mcp2515_write_id>:
+ 7c8:	cf 93       	push	r28
+ 7ca:	df 93       	push	r29
+ 7cc:	ec 01       	movw	r28, r24
+ 7ce:	66 23       	and	r22, r22
+ 7d0:	c9 f0       	breq	.+50     	; 0x804 <mcp2515_write_id+0x3c>
+ 7d2:	8a 81       	ldd	r24, Y+2	; 0x02
+ 7d4:	9b 81       	ldd	r25, Y+3	; 0x03
+ 7d6:	35 e0       	ldi	r19, 0x05	; 5
+ 7d8:	96 95       	lsr	r25
+ 7da:	87 95       	ror	r24
+ 7dc:	3a 95       	dec	r19
+ 7de:	e1 f7       	brne	.-8      	; 0x7d8 <mcp2515_write_id+0x10>
+ 7e0:	8f b9       	out	0x0f, r24	; 15
+ 7e2:	9a 81       	ldd	r25, Y+2	; 0x02
+ 7e4:	77 9b       	sbis	0x0e, 7	; 14
+ 7e6:	fe cf       	rjmp	.-4      	; 0x7e4 <mcp2515_write_id+0x1c>
+ 7e8:	8f b1       	in	r24, 0x0f	; 15
+ 7ea:	89 2f       	mov	r24, r25
+ 7ec:	88 0f       	add	r24, r24
+ 7ee:	88 0f       	add	r24, r24
+ 7f0:	88 0f       	add	r24, r24
+ 7f2:	80 7e       	andi	r24, 0xE0	; 224
+ 7f4:	88 60       	ori	r24, 0x08	; 8
+ 7f6:	93 70       	andi	r25, 0x03	; 3
+ 7f8:	89 2b       	or	r24, r25
+ 7fa:	6b d0       	rcall	.+214    	; 0x8d2 <spi_putc>
+ 7fc:	89 81       	ldd	r24, Y+1	; 0x01
+ 7fe:	69 d0       	rcall	.+210    	; 0x8d2 <spi_putc>
+ 800:	88 81       	ld	r24, Y
+ 802:	13 c0       	rjmp	.+38     	; 0x82a <mcp2515_write_id+0x62>
+ 804:	88 81       	ld	r24, Y
+ 806:	99 81       	ldd	r25, Y+1	; 0x01
+ 808:	23 e0       	ldi	r18, 0x03	; 3
+ 80a:	96 95       	lsr	r25
+ 80c:	87 95       	ror	r24
+ 80e:	2a 95       	dec	r18
+ 810:	e1 f7       	brne	.-8      	; 0x80a <mcp2515_write_id+0x42>
+ 812:	8f b9       	out	0x0f, r24	; 15
+ 814:	88 81       	ld	r24, Y
+ 816:	77 9b       	sbis	0x0e, 7	; 14
+ 818:	fe cf       	rjmp	.-4      	; 0x816 <mcp2515_write_id+0x4e>
+ 81a:	9f b1       	in	r25, 0x0f	; 15
+ 81c:	82 95       	swap	r24
+ 81e:	88 0f       	add	r24, r24
+ 820:	80 7e       	andi	r24, 0xE0	; 224
+ 822:	57 d0       	rcall	.+174    	; 0x8d2 <spi_putc>
+ 824:	80 e0       	ldi	r24, 0x00	; 0
+ 826:	55 d0       	rcall	.+170    	; 0x8d2 <spi_putc>
+ 828:	80 e0       	ldi	r24, 0x00	; 0
+ 82a:	53 d0       	rcall	.+166    	; 0x8d2 <spi_putc>
+ 82c:	df 91       	pop	r29
+ 82e:	cf 91       	pop	r28
+ 830:	08 95       	ret
+
+00000832 <mcp2515_read_id>:
+ 832:	1f 93       	push	r17
+ 834:	cf 93       	push	r28
+ 836:	df 93       	push	r29
+ 838:	ec 01       	movw	r28, r24
+ 83a:	8f ef       	ldi	r24, 0xFF	; 255
+ 83c:	4a d0       	rcall	.+148    	; 0x8d2 <spi_putc>
+ 83e:	18 2f       	mov	r17, r24
+ 840:	8f ef       	ldi	r24, 0xFF	; 255
+ 842:	47 d0       	rcall	.+142    	; 0x8d2 <spi_putc>
+ 844:	48 2f       	mov	r20, r24
+ 846:	21 2f       	mov	r18, r17
+ 848:	30 e0       	ldi	r19, 0x00	; 0
+ 84a:	83 ff       	sbrs	r24, 3
+ 84c:	1f c0       	rjmp	.+62     	; 0x88c <mcp2515_read_id+0x5a>
+ 84e:	8f ef       	ldi	r24, 0xFF	; 255
+ 850:	8f b9       	out	0x0f, r24	; 15
+ 852:	95 e0       	ldi	r25, 0x05	; 5
+ 854:	22 0f       	add	r18, r18
+ 856:	33 1f       	adc	r19, r19
+ 858:	9a 95       	dec	r25
+ 85a:	e1 f7       	brne	.-8      	; 0x854 <mcp2515_read_id+0x22>
+ 85c:	3b 83       	std	Y+3, r19	; 0x03
+ 85e:	2a 83       	std	Y+2, r18	; 0x02
+ 860:	77 9b       	sbis	0x0e, 7	; 14
+ 862:	fe cf       	rjmp	.-4      	; 0x860 <mcp2515_read_id+0x2e>
+ 864:	8f b1       	in	r24, 0x0f	; 15
+ 866:	89 83       	std	Y+1, r24	; 0x01
+ 868:	8f ef       	ldi	r24, 0xFF	; 255
+ 86a:	8f b9       	out	0x0f, r24	; 15
+ 86c:	84 2f       	mov	r24, r20
+ 86e:	83 70       	andi	r24, 0x03	; 3
+ 870:	9a 81       	ldd	r25, Y+2	; 0x02
+ 872:	89 2b       	or	r24, r25
+ 874:	46 95       	lsr	r20
+ 876:	46 95       	lsr	r20
+ 878:	46 95       	lsr	r20
+ 87a:	4c 71       	andi	r20, 0x1C	; 28
+ 87c:	84 2b       	or	r24, r20
+ 87e:	8a 83       	std	Y+2, r24	; 0x02
+ 880:	77 9b       	sbis	0x0e, 7	; 14
+ 882:	fe cf       	rjmp	.-4      	; 0x880 <mcp2515_read_id+0x4e>
+ 884:	8f b1       	in	r24, 0x0f	; 15
+ 886:	88 83       	st	Y, r24
+ 888:	81 e0       	ldi	r24, 0x01	; 1
+ 88a:	1a c0       	rjmp	.+52     	; 0x8c0 <mcp2515_read_id+0x8e>
+ 88c:	8f ef       	ldi	r24, 0xFF	; 255
+ 88e:	8f b9       	out	0x0f, r24	; 15
+ 890:	1b 82       	std	Y+3, r1	; 0x03
+ 892:	1a 82       	std	Y+2, r1	; 0x02
+ 894:	83 e0       	ldi	r24, 0x03	; 3
+ 896:	22 0f       	add	r18, r18
+ 898:	33 1f       	adc	r19, r19
+ 89a:	8a 95       	dec	r24
+ 89c:	e1 f7       	brne	.-8      	; 0x896 <mcp2515_read_id+0x64>
+ 89e:	39 83       	std	Y+1, r19	; 0x01
+ 8a0:	28 83       	st	Y, r18
+ 8a2:	77 9b       	sbis	0x0e, 7	; 14
+ 8a4:	fe cf       	rjmp	.-4      	; 0x8a2 <mcp2515_read_id+0x70>
+ 8a6:	8f b1       	in	r24, 0x0f	; 15
+ 8a8:	8f ef       	ldi	r24, 0xFF	; 255
+ 8aa:	8f b9       	out	0x0f, r24	; 15
+ 8ac:	42 95       	swap	r20
+ 8ae:	46 95       	lsr	r20
+ 8b0:	47 70       	andi	r20, 0x07	; 7
+ 8b2:	88 81       	ld	r24, Y
+ 8b4:	84 2b       	or	r24, r20
+ 8b6:	88 83       	st	Y, r24
+ 8b8:	77 9b       	sbis	0x0e, 7	; 14
+ 8ba:	fe cf       	rjmp	.-4      	; 0x8b8 <mcp2515_read_id+0x86>
+ 8bc:	8f b1       	in	r24, 0x0f	; 15
+ 8be:	80 e0       	ldi	r24, 0x00	; 0
+ 8c0:	df 91       	pop	r29
+ 8c2:	cf 91       	pop	r28
+ 8c4:	1f 91       	pop	r17
+ 8c6:	08 95       	ret
+
+000008c8 <mcp2515_spi_init>:
+ 8c8:	81 e5       	ldi	r24, 0x51	; 81
+ 8ca:	8d b9       	out	0x0d, r24	; 13
+ 8cc:	81 e0       	ldi	r24, 0x01	; 1
+ 8ce:	8e b9       	out	0x0e, r24	; 14
+ 8d0:	08 95       	ret
+
+000008d2 <spi_putc>:
+ 8d2:	8f b9       	out	0x0f, r24	; 15
+ 8d4:	77 9b       	sbis	0x0e, 7	; 14
+ 8d6:	fe cf       	rjmp	.-4      	; 0x8d4 <spi_putc+0x2>
+ 8d8:	8f b1       	in	r24, 0x0f	; 15
+ 8da:	08 95       	ret
+
+000008dc <_exit>:
+ 8dc:	f8 94       	cli
+
+000008de <__stop_program>:
+ 8de:	ff cf       	rjmp	.-2      	; 0x8de <__stop_program>

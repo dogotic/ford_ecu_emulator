@@ -1,0 +1,165 @@
+   1               		.file	"mcp2515_send_message.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	can_send_message
+  18               	can_send_message:
+  19               	.LFB18:
+  20               	.LM1:
+  21               	.LVL0:
+  22 0000 FF92      		push r15
+  23 0002 0F93      		push r16
+  24 0004 1F93      		push r17
+  25 0006 CF93      		push r28
+  26 0008 DF93      		push r29
+  27               	/* prologue: function */
+  28               	/* frame size = 0 */
+  29 000a EC01      		movw r28,r24
+  30               	.LM2:
+  31 000c 80EA      		ldi r24,lo8(-96)
+  32               	.LVL1:
+  33 000e 00D0      		rcall mcp2515_read_status
+  34               	.LM3:
+  35 0010 82FD      		sbrc r24,2
+  36 0012 00C0      		rjmp .L2
+  37 0014 FF24      		clr r15
+  38               	.LVL2:
+  39 0016 00C0      		rjmp .L3
+  40               	.LVL3:
+  41               	.L2:
+  42               	.LM4:
+  43 0018 84FD      		sbrc r24,4
+  44 001a 00C0      		rjmp .L4
+  45 001c 92E0      		ldi r25,lo8(2)
+  46 001e F92E      		mov r15,r25
+  47               	.LVL4:
+  48 0020 00C0      		rjmp .L3
+  49               	.LVL5:
+  50               	.L4:
+  51               	.LM5:
+  52 0022 86FF      		sbrs r24,6
+  53 0024 00C0      		rjmp .L5
+  54 0026 FF24      		clr r15
+  55               	.LVL6:
+  56 0028 00C0      		rjmp .L6
+  57               	.LVL7:
+  58               	.L5:
+  59 002a 84E0      		ldi r24,lo8(4)
+  60 002c F82E      		mov r15,r24
+  61               	.LVL8:
+  62               	.L3:
+  63               	.LM6:
+  64 002e C298      		cbi 56-32,2
+  65               	.LM7:
+  66 0030 8F2D      		mov r24,r15
+  67 0032 8064      		ori r24,lo8(64)
+  68 0034 00D0      		rcall spi_putc
+  69               	.LM8:
+  70 0036 6C81      		ldd r22,Y+4
+  71 0038 6695      		lsr r22
+  72 003a 6170      		andi r22,lo8(1)
+  73 003c CE01      		movw r24,r28
+  74 003e 00D0      		rcall mcp2515_write_id
+  75               	.LM9:
+  76 0040 0D81      		ldd r16,Y+5
+  77               	.LVL9:
+  78 0042 0F70      		andi r16,lo8(15)
+  79               	.LM10:
+  80 0044 8C81      		ldd r24,Y+4
+  81 0046 80FF      		sbrs r24,0
+  82 0048 00C0      		rjmp .L7
+  83               	.LM11:
+  84 004a 802F      		mov r24,r16
+  85 004c 8064      		ori r24,lo8(64)
+  86 004e 00D0      		rcall spi_putc
+  87 0050 00C0      		rjmp .L8
+  88               	.L7:
+  89               	.LM12:
+  90 0052 802F      		mov r24,r16
+  91 0054 00D0      		rcall spi_putc
+  92 0056 10E0      		ldi r17,lo8(0)
+  93               	.LVL10:
+  94 0058 00C0      		rjmp .L9
+  95               	.L10:
+  96               	.LBB25:
+  97               	.LM13:
+  98 005a FE01      		movw r30,r28
+  99 005c E10F      		add r30,r17
+ 100 005e F11D      		adc r31,__zero_reg__
+ 101 0060 8681      		ldd r24,Z+6
+ 102 0062 00D0      		rcall spi_putc
+ 103               	.LM14:
+ 104 0064 1F5F      		subi r17,lo8(-(1))
+ 105               	.L9:
+ 106 0066 1017      		cp r17,r16
+ 107 0068 00F0      		brlo .L10
+ 108               	.L8:
+ 109               	.LBE25:
+ 110               	.LM15:
+ 111 006a C29A      		sbi 56-32,2
+ 112               	.LBB26:
+ 113               	.LBB27:
+ 114               	.LBB28:
+ 115               	.LBB29:
+ 116               	.LM16:
+ 117 006c 85E0      		ldi r24,lo8(5)
+ 118               	.LVL11:
+ 119               	/* #APP */
+ 120               	 ;  83 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 121 006e 8A95      		1: dec r24
+ 122 0070 01F4      		brne 1b
+ 123               	 ;  0 "" 2
+ 124               	/* #NOAPP */
+ 125               	.LBE29:
+ 126               	.LBE28:
+ 127               	.LBE27:
+ 128               	.LBE26:
+ 129               	.LM17:
+ 130 0072 C298      		cbi 56-32,2
+ 131               	.LM18:
+ 132 0074 FF20      		tst r15
+ 133 0076 01F4      		brne .L11
+ 134 0078 FF24      		clr r15
+ 135 007a F394      		inc r15
+ 136               	.L11:
+ 137               	.LM19:
+ 138 007c 8F2D      		mov r24,r15
+ 139               	.LVL12:
+ 140 007e 8068      		ori r24,lo8(-128)
+ 141 0080 00D0      		rcall spi_putc
+ 142               	.LM20:
+ 143 0082 C29A      		sbi 56-32,2
+ 144               	.L6:
+ 145               	.LM21:
+ 146 0084 8F2D      		mov r24,r15
+ 147               	/* epilogue start */
+ 148 0086 DF91      		pop r29
+ 149 0088 CF91      		pop r28
+ 150               	.LVL13:
+ 151 008a 1F91      		pop r17
+ 152               	.LVL14:
+ 153 008c 0F91      		pop r16
+ 154               	.LVL15:
+ 155 008e FF90      		pop r15
+ 156               	.LVL16:
+ 157 0090 0895      		ret
+ 158               	.LFE18:
+ 184               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 mcp2515_send_message.c
+C:\Users\zag00046\AppData\Local\Temp/ccvcLvEW.s:2      *ABS*:0000003f __SREG__
+C:\Users\zag00046\AppData\Local\Temp/ccvcLvEW.s:3      *ABS*:0000003e __SP_H__
+C:\Users\zag00046\AppData\Local\Temp/ccvcLvEW.s:4      *ABS*:0000003d __SP_L__
+C:\Users\zag00046\AppData\Local\Temp/ccvcLvEW.s:5      *ABS*:00000034 __CCP__
+C:\Users\zag00046\AppData\Local\Temp/ccvcLvEW.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccvcLvEW.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccvcLvEW.s:18     .text:00000000 can_send_message
+
+UNDEFINED SYMBOLS
+mcp2515_read_status
+spi_putc
+mcp2515_write_id

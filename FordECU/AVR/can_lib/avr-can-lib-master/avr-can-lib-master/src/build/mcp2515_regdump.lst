@@ -1,0 +1,442 @@
+   1               		.file	"mcp2515_regdump.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.data
+  17               	.LC0:
+  18 0000 4D43 5032 		.string	"MCP2515 Regdump:\n"
+  18      3531 3520 
+  18      5265 6764 
+  18      756D 703A 
+  18      0A00 
+  19               	.LC1:
+  20 0012 2533 693A 		.string	"%3i: %02x   "
+  20      2025 3032 
+  20      7820 2020 
+  20      00
+  21               	.LC2:
+  22 001f 2533 693A 		.string	"%3i: %02x\n"
+  22      2025 3032 
+  22      780A 00
+  23               		.text
+  24               	.global	mcp2515_regdump
+  26               	mcp2515_regdump:
+  27               	.LFB19:
+  28               	.LM1:
+  29 0000 2F92      		push r2
+  30 0002 3F92      		push r3
+  31 0004 4F92      		push r4
+  32 0006 5F92      		push r5
+  33 0008 6F92      		push r6
+  34 000a 7F92      		push r7
+  35 000c 8F92      		push r8
+  36 000e 9F92      		push r9
+  37 0010 AF92      		push r10
+  38 0012 BF92      		push r11
+  39 0014 CF92      		push r12
+  40 0016 DF92      		push r13
+  41 0018 EF92      		push r14
+  42 001a FF92      		push r15
+  43 001c 0F93      		push r16
+  44 001e 1F93      		push r17
+  45 0020 DF93      		push r29
+  46 0022 CF93      		push r28
+  47 0024 0F92      		push __tmp_reg__
+  48 0026 CDB7      		in r28,__SP_L__
+  49 0028 DEB7      		in r29,__SP_H__
+  50               	/* prologue: function */
+  51               	/* frame size = 1 */
+  52               	.LM2:
+  53 002a 8EE0      		ldi r24,lo8(14)
+  54 002c 00D0      		rcall mcp2515_read_register
+  55 002e 8983      		std Y+1,r24
+  56               	.LVL0:
+  57               	.LBB6:
+  58               	.LBB7:
+  59               	.LM3:
+  60 0030 8FE0      		ldi r24,lo8(15)
+  61 0032 60EE      		ldi r22,lo8(-32)
+  62 0034 40E8      		ldi r20,lo8(-128)
+  63 0036 00D0      		rcall mcp2515_bit_modify
+  64               	.LM4:
+  65 0038 00E8      		ldi r16,lo8(128)
+  66 003a 10E0      		ldi r17,hi8(128)
+  67               	.L2:
+  68               	.LBE7:
+  69 003c 8EE0      		ldi r24,lo8(14)
+  70 003e 00D0      		rcall mcp2515_read_register
+  71               	.LBB8:
+  72 0040 8027      		eor r24,r16
+  73 0042 807E      		andi r24,lo8(-32)
+  74 0044 01F4      		brne .L2
+  75               	.LBE8:
+  76               	.LBE6:
+  77               	.LM5:
+  78 0046 00D0      		rcall .
+  79 0048 80E0      		ldi r24,lo8(.LC0)
+  80 004a 90E0      		ldi r25,hi8(.LC0)
+  81 004c ADB7      		in r26,__SP_L__
+  82 004e BEB7      		in r27,__SP_H__
+  83 0050 1296      		adiw r26,1+1
+  84 0052 9C93      		st X,r25
+  85 0054 8E93      		st -X,r24
+  86 0056 1197      		sbiw r26,1
+  87 0058 00D0      		rcall printf_P
+  88 005a 00E0      		ldi r16,lo8(0)
+  89 005c 10E0      		ldi r17,hi8(0)
+  90 005e 60E1      		ldi r22,lo8(16)
+  91 0060 262E      		mov r2,r22
+  92 0062 312C      		mov r3,__zero_reg__
+  93 0064 50E2      		ldi r21,lo8(32)
+  94 0066 452E      		mov r4,r21
+  95 0068 512C      		mov r5,__zero_reg__
+  96 006a 40E3      		ldi r20,lo8(48)
+  97 006c 642E      		mov r6,r20
+  98 006e 712C      		mov r7,__zero_reg__
+  99 0070 30E4      		ldi r19,lo8(64)
+ 100 0072 832E      		mov r8,r19
+ 101 0074 912C      		mov r9,__zero_reg__
+ 102 0076 20E5      		ldi r18,lo8(80)
+ 103 0078 A22E      		mov r10,r18
+ 104 007a B12C      		mov r11,__zero_reg__
+ 105 007c 90E6      		ldi r25,lo8(96)
+ 106 007e C92E      		mov r12,r25
+ 107 0080 D12C      		mov r13,__zero_reg__
+ 108 0082 80E7      		ldi r24,lo8(112)
+ 109 0084 E82E      		mov r14,r24
+ 110 0086 F12C      		mov r15,__zero_reg__
+ 111 0088 0F90      		pop __tmp_reg__
+ 112 008a 0F90      		pop __tmp_reg__
+ 113               	.L3:
+ 114               	.LM6:
+ 115 008c 802F      		mov r24,r16
+ 116 008e 00D0      		rcall mcp2515_read_register
+ 117 0090 00D0      		rcall .
+ 118 0092 00D0      		rcall .
+ 119 0094 00D0      		rcall .
+ 120 0096 EDB7      		in r30,__SP_L__
+ 121 0098 FEB7      		in r31,__SP_H__
+ 122 009a 3196      		adiw r30,1
+ 123 009c 20E0      		ldi r18,lo8(.LC1)
+ 124 009e 30E0      		ldi r19,hi8(.LC1)
+ 125 00a0 ADB7      		in r26,__SP_L__
+ 126 00a2 BEB7      		in r27,__SP_H__
+ 127 00a4 1296      		adiw r26,1+1
+ 128 00a6 3C93      		st X,r19
+ 129 00a8 2E93      		st -X,r18
+ 130 00aa 1197      		sbiw r26,1
+ 131 00ac 1383      		std Z+3,r17
+ 132 00ae 0283      		std Z+2,r16
+ 133 00b0 8483      		std Z+4,r24
+ 134 00b2 1582      		std Z+5,__zero_reg__
+ 135 00b4 00D0      		rcall printf_P
+ 136               	.LM7:
+ 137 00b6 8DB7      		in r24,__SP_L__
+ 138 00b8 9EB7      		in r25,__SP_H__
+ 139 00ba 0696      		adiw r24,6
+ 140 00bc 0FB6      		in __tmp_reg__,__SREG__
+ 141 00be F894      		cli
+ 142 00c0 9EBF      		out __SP_H__,r25
+ 143 00c2 0FBE      		out __SREG__,__tmp_reg__
+ 144 00c4 8DBF      		out __SP_L__,r24
+ 145 00c6 822D      		mov r24,r2
+ 146 00c8 00D0      		rcall mcp2515_read_register
+ 147 00ca 00D0      		rcall .
+ 148 00cc 00D0      		rcall .
+ 149 00ce 00D0      		rcall .
+ 150 00d0 EDB7      		in r30,__SP_L__
+ 151 00d2 FEB7      		in r31,__SP_H__
+ 152 00d4 3196      		adiw r30,1
+ 153 00d6 20E0      		ldi r18,lo8(.LC1)
+ 154 00d8 30E0      		ldi r19,hi8(.LC1)
+ 155 00da ADB7      		in r26,__SP_L__
+ 156 00dc BEB7      		in r27,__SP_H__
+ 157 00de 1296      		adiw r26,1+1
+ 158 00e0 3C93      		st X,r19
+ 159 00e2 2E93      		st -X,r18
+ 160 00e4 1197      		sbiw r26,1
+ 161 00e6 3382      		std Z+3,r3
+ 162 00e8 2282      		std Z+2,r2
+ 163 00ea 8483      		std Z+4,r24
+ 164 00ec 1582      		std Z+5,__zero_reg__
+ 165 00ee 00D0      		rcall printf_P
+ 166               	.LM8:
+ 167 00f0 8DB7      		in r24,__SP_L__
+ 168 00f2 9EB7      		in r25,__SP_H__
+ 169 00f4 0696      		adiw r24,6
+ 170 00f6 0FB6      		in __tmp_reg__,__SREG__
+ 171 00f8 F894      		cli
+ 172 00fa 9EBF      		out __SP_H__,r25
+ 173 00fc 0FBE      		out __SREG__,__tmp_reg__
+ 174 00fe 8DBF      		out __SP_L__,r24
+ 175 0100 842D      		mov r24,r4
+ 176 0102 00D0      		rcall mcp2515_read_register
+ 177 0104 00D0      		rcall .
+ 178 0106 00D0      		rcall .
+ 179 0108 00D0      		rcall .
+ 180 010a EDB7      		in r30,__SP_L__
+ 181 010c FEB7      		in r31,__SP_H__
+ 182 010e 3196      		adiw r30,1
+ 183 0110 20E0      		ldi r18,lo8(.LC1)
+ 184 0112 30E0      		ldi r19,hi8(.LC1)
+ 185 0114 ADB7      		in r26,__SP_L__
+ 186 0116 BEB7      		in r27,__SP_H__
+ 187 0118 1296      		adiw r26,1+1
+ 188 011a 3C93      		st X,r19
+ 189 011c 2E93      		st -X,r18
+ 190 011e 1197      		sbiw r26,1
+ 191 0120 5382      		std Z+3,r5
+ 192 0122 4282      		std Z+2,r4
+ 193 0124 8483      		std Z+4,r24
+ 194 0126 1582      		std Z+5,__zero_reg__
+ 195 0128 00D0      		rcall printf_P
+ 196               	.LM9:
+ 197 012a 8DB7      		in r24,__SP_L__
+ 198 012c 9EB7      		in r25,__SP_H__
+ 199 012e 0696      		adiw r24,6
+ 200 0130 0FB6      		in __tmp_reg__,__SREG__
+ 201 0132 F894      		cli
+ 202 0134 9EBF      		out __SP_H__,r25
+ 203 0136 0FBE      		out __SREG__,__tmp_reg__
+ 204 0138 8DBF      		out __SP_L__,r24
+ 205 013a 862D      		mov r24,r6
+ 206 013c 00D0      		rcall mcp2515_read_register
+ 207 013e 00D0      		rcall .
+ 208 0140 00D0      		rcall .
+ 209 0142 00D0      		rcall .
+ 210 0144 EDB7      		in r30,__SP_L__
+ 211 0146 FEB7      		in r31,__SP_H__
+ 212 0148 3196      		adiw r30,1
+ 213 014a 20E0      		ldi r18,lo8(.LC1)
+ 214 014c 30E0      		ldi r19,hi8(.LC1)
+ 215 014e ADB7      		in r26,__SP_L__
+ 216 0150 BEB7      		in r27,__SP_H__
+ 217 0152 1296      		adiw r26,1+1
+ 218 0154 3C93      		st X,r19
+ 219 0156 2E93      		st -X,r18
+ 220 0158 1197      		sbiw r26,1
+ 221 015a 7382      		std Z+3,r7
+ 222 015c 6282      		std Z+2,r6
+ 223 015e 8483      		std Z+4,r24
+ 224 0160 1582      		std Z+5,__zero_reg__
+ 225 0162 00D0      		rcall printf_P
+ 226               	.LM10:
+ 227 0164 8DB7      		in r24,__SP_L__
+ 228 0166 9EB7      		in r25,__SP_H__
+ 229 0168 0696      		adiw r24,6
+ 230 016a 0FB6      		in __tmp_reg__,__SREG__
+ 231 016c F894      		cli
+ 232 016e 9EBF      		out __SP_H__,r25
+ 233 0170 0FBE      		out __SREG__,__tmp_reg__
+ 234 0172 8DBF      		out __SP_L__,r24
+ 235 0174 882D      		mov r24,r8
+ 236 0176 00D0      		rcall mcp2515_read_register
+ 237 0178 00D0      		rcall .
+ 238 017a 00D0      		rcall .
+ 239 017c 00D0      		rcall .
+ 240 017e EDB7      		in r30,__SP_L__
+ 241 0180 FEB7      		in r31,__SP_H__
+ 242 0182 3196      		adiw r30,1
+ 243 0184 20E0      		ldi r18,lo8(.LC1)
+ 244 0186 30E0      		ldi r19,hi8(.LC1)
+ 245 0188 ADB7      		in r26,__SP_L__
+ 246 018a BEB7      		in r27,__SP_H__
+ 247 018c 1296      		adiw r26,1+1
+ 248 018e 3C93      		st X,r19
+ 249 0190 2E93      		st -X,r18
+ 250 0192 1197      		sbiw r26,1
+ 251 0194 9382      		std Z+3,r9
+ 252 0196 8282      		std Z+2,r8
+ 253 0198 8483      		std Z+4,r24
+ 254 019a 1582      		std Z+5,__zero_reg__
+ 255 019c 00D0      		rcall printf_P
+ 256               	.LM11:
+ 257 019e 8DB7      		in r24,__SP_L__
+ 258 01a0 9EB7      		in r25,__SP_H__
+ 259 01a2 0696      		adiw r24,6
+ 260 01a4 0FB6      		in __tmp_reg__,__SREG__
+ 261 01a6 F894      		cli
+ 262 01a8 9EBF      		out __SP_H__,r25
+ 263 01aa 0FBE      		out __SREG__,__tmp_reg__
+ 264 01ac 8DBF      		out __SP_L__,r24
+ 265 01ae 8A2D      		mov r24,r10
+ 266 01b0 00D0      		rcall mcp2515_read_register
+ 267 01b2 00D0      		rcall .
+ 268 01b4 00D0      		rcall .
+ 269 01b6 00D0      		rcall .
+ 270 01b8 EDB7      		in r30,__SP_L__
+ 271 01ba FEB7      		in r31,__SP_H__
+ 272 01bc 3196      		adiw r30,1
+ 273 01be 20E0      		ldi r18,lo8(.LC1)
+ 274 01c0 30E0      		ldi r19,hi8(.LC1)
+ 275 01c2 ADB7      		in r26,__SP_L__
+ 276 01c4 BEB7      		in r27,__SP_H__
+ 277 01c6 1296      		adiw r26,1+1
+ 278 01c8 3C93      		st X,r19
+ 279 01ca 2E93      		st -X,r18
+ 280 01cc 1197      		sbiw r26,1
+ 281 01ce B382      		std Z+3,r11
+ 282 01d0 A282      		std Z+2,r10
+ 283 01d2 8483      		std Z+4,r24
+ 284 01d4 1582      		std Z+5,__zero_reg__
+ 285 01d6 00D0      		rcall printf_P
+ 286               	.LM12:
+ 287 01d8 8DB7      		in r24,__SP_L__
+ 288 01da 9EB7      		in r25,__SP_H__
+ 289 01dc 0696      		adiw r24,6
+ 290 01de 0FB6      		in __tmp_reg__,__SREG__
+ 291 01e0 F894      		cli
+ 292 01e2 9EBF      		out __SP_H__,r25
+ 293 01e4 0FBE      		out __SREG__,__tmp_reg__
+ 294 01e6 8DBF      		out __SP_L__,r24
+ 295 01e8 8C2D      		mov r24,r12
+ 296 01ea 00D0      		rcall mcp2515_read_register
+ 297 01ec 00D0      		rcall .
+ 298 01ee 00D0      		rcall .
+ 299 01f0 00D0      		rcall .
+ 300 01f2 EDB7      		in r30,__SP_L__
+ 301 01f4 FEB7      		in r31,__SP_H__
+ 302 01f6 3196      		adiw r30,1
+ 303 01f8 20E0      		ldi r18,lo8(.LC1)
+ 304 01fa 30E0      		ldi r19,hi8(.LC1)
+ 305 01fc ADB7      		in r26,__SP_L__
+ 306 01fe BEB7      		in r27,__SP_H__
+ 307 0200 1296      		adiw r26,1+1
+ 308 0202 3C93      		st X,r19
+ 309 0204 2E93      		st -X,r18
+ 310 0206 1197      		sbiw r26,1
+ 311 0208 D382      		std Z+3,r13
+ 312 020a C282      		std Z+2,r12
+ 313 020c 8483      		std Z+4,r24
+ 314 020e 1582      		std Z+5,__zero_reg__
+ 315 0210 00D0      		rcall printf_P
+ 316               	.LM13:
+ 317 0212 8DB7      		in r24,__SP_L__
+ 318 0214 9EB7      		in r25,__SP_H__
+ 319 0216 0696      		adiw r24,6
+ 320 0218 0FB6      		in __tmp_reg__,__SREG__
+ 321 021a F894      		cli
+ 322 021c 9EBF      		out __SP_H__,r25
+ 323 021e 0FBE      		out __SREG__,__tmp_reg__
+ 324 0220 8DBF      		out __SP_L__,r24
+ 325 0222 8E2D      		mov r24,r14
+ 326 0224 00D0      		rcall mcp2515_read_register
+ 327 0226 00D0      		rcall .
+ 328 0228 00D0      		rcall .
+ 329 022a 00D0      		rcall .
+ 330 022c EDB7      		in r30,__SP_L__
+ 331 022e FEB7      		in r31,__SP_H__
+ 332 0230 3196      		adiw r30,1
+ 333 0232 20E0      		ldi r18,lo8(.LC2)
+ 334 0234 30E0      		ldi r19,hi8(.LC2)
+ 335 0236 ADB7      		in r26,__SP_L__
+ 336 0238 BEB7      		in r27,__SP_H__
+ 337 023a 1296      		adiw r26,1+1
+ 338 023c 3C93      		st X,r19
+ 339 023e 2E93      		st -X,r18
+ 340 0240 1197      		sbiw r26,1
+ 341 0242 F382      		std Z+3,r15
+ 342 0244 E282      		std Z+2,r14
+ 343 0246 8483      		std Z+4,r24
+ 344 0248 1582      		std Z+5,__zero_reg__
+ 345 024a 00D0      		rcall printf_P
+ 346 024c 0F5F      		subi r16,lo8(-(1))
+ 347 024e 1F4F      		sbci r17,hi8(-(1))
+ 348 0250 0894      		sec
+ 349 0252 211C      		adc r2,__zero_reg__
+ 350 0254 311C      		adc r3,__zero_reg__
+ 351 0256 0894      		sec
+ 352 0258 411C      		adc r4,__zero_reg__
+ 353 025a 511C      		adc r5,__zero_reg__
+ 354 025c 0894      		sec
+ 355 025e 611C      		adc r6,__zero_reg__
+ 356 0260 711C      		adc r7,__zero_reg__
+ 357 0262 0894      		sec
+ 358 0264 811C      		adc r8,__zero_reg__
+ 359 0266 911C      		adc r9,__zero_reg__
+ 360 0268 0894      		sec
+ 361 026a A11C      		adc r10,__zero_reg__
+ 362 026c B11C      		adc r11,__zero_reg__
+ 363 026e 0894      		sec
+ 364 0270 C11C      		adc r12,__zero_reg__
+ 365 0272 D11C      		adc r13,__zero_reg__
+ 366 0274 0894      		sec
+ 367 0276 E11C      		adc r14,__zero_reg__
+ 368 0278 F11C      		adc r15,__zero_reg__
+ 369               	.LM14:
+ 370 027a 8DB7      		in r24,__SP_L__
+ 371 027c 9EB7      		in r25,__SP_H__
+ 372 027e 0696      		adiw r24,6
+ 373 0280 0FB6      		in __tmp_reg__,__SREG__
+ 374 0282 F894      		cli
+ 375 0284 9EBF      		out __SP_H__,r25
+ 376 0286 0FBE      		out __SREG__,__tmp_reg__
+ 377 0288 8DBF      		out __SP_L__,r24
+ 378 028a 0031      		cpi r16,16
+ 379 028c 1105      		cpc r17,__zero_reg__
+ 380 028e 01F0      		breq .+2
+ 381 0290 00C0      		rjmp .L3
+ 382               	.LBB9:
+ 383               	.LBB10:
+ 384               	.LM15:
+ 385 0292 8FE0      		ldi r24,lo8(15)
+ 386 0294 60EE      		ldi r22,lo8(-32)
+ 387 0296 4981      		ldd r20,Y+1
+ 388 0298 00D0      		rcall mcp2515_bit_modify
+ 389               	.LM16:
+ 390 029a 1981      		ldd r17,Y+1
+ 391               	.LVL1:
+ 392               	.L4:
+ 393               	.LBE10:
+ 394 029c 8EE0      		ldi r24,lo8(14)
+ 395 029e 00D0      		rcall mcp2515_read_register
+ 396               	.LBB11:
+ 397 02a0 8127      		eor r24,r17
+ 398 02a2 807E      		andi r24,lo8(-32)
+ 399 02a4 01F4      		brne .L4
+ 400               	/* epilogue start */
+ 401               	.LBE11:
+ 402               	.LBE9:
+ 403               	.LM17:
+ 404 02a6 0F90      		pop __tmp_reg__
+ 405 02a8 CF91      		pop r28
+ 406 02aa DF91      		pop r29
+ 407 02ac 1F91      		pop r17
+ 408               	.LVL2:
+ 409 02ae 0F91      		pop r16
+ 410 02b0 FF90      		pop r15
+ 411 02b2 EF90      		pop r14
+ 412 02b4 DF90      		pop r13
+ 413 02b6 CF90      		pop r12
+ 414 02b8 BF90      		pop r11
+ 415 02ba AF90      		pop r10
+ 416 02bc 9F90      		pop r9
+ 417 02be 8F90      		pop r8
+ 418 02c0 7F90      		pop r7
+ 419 02c2 6F90      		pop r6
+ 420 02c4 5F90      		pop r5
+ 421 02c6 4F90      		pop r4
+ 422 02c8 3F90      		pop r3
+ 423 02ca 2F90      		pop r2
+ 424 02cc 0895      		ret
+ 425               	.LFE19:
+ 451               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 mcp2515_regdump.c
+C:\Users\zag00046\AppData\Local\Temp/ccUEALqJ.s:2      *ABS*:0000003f __SREG__
+C:\Users\zag00046\AppData\Local\Temp/ccUEALqJ.s:3      *ABS*:0000003e __SP_H__
+C:\Users\zag00046\AppData\Local\Temp/ccUEALqJ.s:4      *ABS*:0000003d __SP_L__
+C:\Users\zag00046\AppData\Local\Temp/ccUEALqJ.s:5      *ABS*:00000034 __CCP__
+C:\Users\zag00046\AppData\Local\Temp/ccUEALqJ.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccUEALqJ.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccUEALqJ.s:26     .text:00000000 mcp2515_regdump
+
+UNDEFINED SYMBOLS
+mcp2515_read_register
+mcp2515_bit_modify
+printf_P
+__do_copy_data

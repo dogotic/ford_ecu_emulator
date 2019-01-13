@@ -1,0 +1,56 @@
+   1               		.file	"mcp2515_buffer.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	can_check_message
+  18               	can_check_message:
+  19               	.LFB18:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 86B3      		in r24,54-32
+  25 0002 8095      		com r24
+  26               	.LM3:
+  27 0004 8170      		andi r24,lo8(1)
+  28               	/* epilogue start */
+  29 0006 0895      		ret
+  30               	.LFE18:
+  32               	.global	can_check_free_buffer
+  34               	can_check_free_buffer:
+  35               	.LFB19:
+  36               	.LM4:
+  37               	/* prologue: function */
+  38               	/* frame size = 0 */
+  39               	.LM5:
+  40 0008 80EA      		ldi r24,lo8(-96)
+  41 000a 00D0      		rcall mcp2515_read_status
+  42 000c 90E0      		ldi r25,lo8(0)
+  43 000e 8475      		andi r24,lo8(84)
+  44 0010 8435      		cpi r24,lo8(84)
+  45 0012 01F0      		breq .L4
+  46 0014 91E0      		ldi r25,lo8(1)
+  47               	.L4:
+  48               	.LM6:
+  49 0016 892F      		mov r24,r25
+  50               	/* epilogue start */
+  51 0018 0895      		ret
+  52               	.LFE19:
+  86               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 mcp2515_buffer.c
+C:\Users\zag00046\AppData\Local\Temp/ccrg4NOF.s:2      *ABS*:0000003f __SREG__
+C:\Users\zag00046\AppData\Local\Temp/ccrg4NOF.s:3      *ABS*:0000003e __SP_H__
+C:\Users\zag00046\AppData\Local\Temp/ccrg4NOF.s:4      *ABS*:0000003d __SP_L__
+C:\Users\zag00046\AppData\Local\Temp/ccrg4NOF.s:5      *ABS*:00000034 __CCP__
+C:\Users\zag00046\AppData\Local\Temp/ccrg4NOF.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccrg4NOF.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccrg4NOF.s:18     .text:00000000 can_check_message
+C:\Users\zag00046\AppData\Local\Temp/ccrg4NOF.s:34     .text:00000008 can_check_free_buffer
+
+UNDEFINED SYMBOLS
+mcp2515_read_status

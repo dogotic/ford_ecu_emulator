@@ -1,0 +1,128 @@
+   1               		.file	"mcp2515_write_id.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	mcp2515_write_id
+  18               	mcp2515_write_id:
+  19               	.LFB20:
+  20               	.LM1:
+  21               	.LVL0:
+  22 0000 CF93      		push r28
+  23 0002 DF93      		push r29
+  24               	/* prologue: function */
+  25               	/* frame size = 0 */
+  26 0004 EC01      		movw r28,r24
+  27               	.LM2:
+  28 0006 6623      		tst r22
+  29 0008 01F0      		breq .L2
+  30               	.LVL1:
+  31               	.LM3:
+  32 000a 8A81      		ldd r24,Y+2
+  33 000c 9B81      		ldd r25,Y+3
+  34 000e 35E0      		ldi r19,5
+  35 0010 9695      	1:	lsr r25
+  36 0012 8795      		ror r24
+  37 0014 3A95      		dec r19
+  38 0016 01F4      		brne 1b
+  39               	.LBB10:
+  40               	.LBB11:
+  41               	.LM4:
+  42 0018 8FB9      		out 47-32,r24
+  43               	.LBE11:
+  44               	.LBE10:
+  45               	.LM5:
+  46 001a 9A81      		ldd r25,Y+2
+  47               	.L3:
+  48               	.LBB12:
+  49               	.LBB13:
+  50               	.LM6:
+  51 001c 779B      		sbis 46-32,7
+  52 001e 00C0      		rjmp .L3
+  53               	.LM7:
+  54 0020 8FB1      		in r24,47-32
+  55               	.LBE13:
+  56               	.LBE12:
+  57               	.LM8:
+  58 0022 892F      		mov r24,r25
+  59 0024 880F      		lsl r24
+  60 0026 880F      		lsl r24
+  61 0028 880F      		lsl r24
+  62 002a 807E      		andi r24,lo8(-32)
+  63               	.LM9:
+  64 002c 8860      		ori r24,lo8(8)
+  65 002e 9370      		andi r25,lo8(3)
+  66               	.LM10:
+  67 0030 892B      		or r24,r25
+  68 0032 00D0      		rcall spi_putc
+  69               	.LVL2:
+  70               	.LM11:
+  71 0034 8981      		ldd r24,Y+1
+  72 0036 00D0      		rcall spi_putc
+  73               	.LM12:
+  74 0038 8881      		ld r24,Y
+  75 003a 00C0      		rjmp .L9
+  76               	.LVL3:
+  77               	.L2:
+  78               	.LM13:
+  79 003c 8881      		ld r24,Y
+  80 003e 9981      		ldd r25,Y+1
+  81 0040 23E0      		ldi r18,3
+  82 0042 9695      	1:	lsr r25
+  83 0044 8795      		ror r24
+  84 0046 2A95      		dec r18
+  85 0048 01F4      		brne 1b
+  86               	.LBB14:
+  87               	.LBB15:
+  88               	.LM14:
+  89 004a 8FB9      		out 47-32,r24
+  90               	.LBE15:
+  91               	.LBE14:
+  92               	.LM15:
+  93 004c 8881      		ld r24,Y
+  94               	.L5:
+  95               	.LBB16:
+  96               	.LBB17:
+  97               	.LM16:
+  98 004e 779B      		sbis 46-32,7
+  99 0050 00C0      		rjmp .L5
+ 100               	.LM17:
+ 101 0052 9FB1      		in r25,47-32
+ 102               	.LBE17:
+ 103               	.LBE16:
+ 104               	.LM18:
+ 105 0054 8295      		swap r24
+ 106 0056 880F      		lsl r24
+ 107 0058 807E      		andi r24,lo8(-32)
+ 108 005a 00D0      		rcall spi_putc
+ 109               	.LVL4:
+ 110               	.LM19:
+ 111 005c 80E0      		ldi r24,lo8(0)
+ 112 005e 00D0      		rcall spi_putc
+ 113               	.LM20:
+ 114 0060 80E0      		ldi r24,lo8(0)
+ 115               	.L9:
+ 116 0062 00D0      		rcall spi_putc
+ 117               	/* epilogue start */
+ 118               	.LM21:
+ 119 0064 DF91      		pop r29
+ 120 0066 CF91      		pop r28
+ 121               	.LVL5:
+ 122 0068 0895      		ret
+ 123               	.LFE20:
+ 149               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 mcp2515_write_id.c
+C:\Users\zag00046\AppData\Local\Temp/ccg8rVql.s:2      *ABS*:0000003f __SREG__
+C:\Users\zag00046\AppData\Local\Temp/ccg8rVql.s:3      *ABS*:0000003e __SP_H__
+C:\Users\zag00046\AppData\Local\Temp/ccg8rVql.s:4      *ABS*:0000003d __SP_L__
+C:\Users\zag00046\AppData\Local\Temp/ccg8rVql.s:5      *ABS*:00000034 __CCP__
+C:\Users\zag00046\AppData\Local\Temp/ccg8rVql.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccg8rVql.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccg8rVql.s:18     .text:00000000 mcp2515_write_id
+
+UNDEFINED SYMBOLS
+spi_putc

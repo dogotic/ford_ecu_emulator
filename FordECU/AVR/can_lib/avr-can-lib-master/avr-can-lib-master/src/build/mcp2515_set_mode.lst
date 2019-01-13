@@ -1,0 +1,88 @@
+   1               		.file	"mcp2515_set_mode.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	can_set_mode
+  18               	can_set_mode:
+  19               	.LFB18:
+  20               	.LM1:
+  21               	.LVL0:
+  22 0000 1F93      		push r17
+  23 0002 CF93      		push r28
+  24 0004 DF93      		push r29
+  25               	/* prologue: function */
+  26               	/* frame size = 0 */
+  27               	.LM2:
+  28 0006 8823      		tst r24
+  29 0008 01F4      		brne .L2
+  30 000a 10E6      		ldi r17,lo8(96)
+  31               	.LVL1:
+  32 000c 00C0      		rjmp .L3
+  33               	.LVL2:
+  34               	.L2:
+  35               	.LM3:
+  36 000e 8130      		cpi r24,lo8(1)
+  37 0010 01F4      		brne .L4
+  38 0012 10E4      		ldi r17,lo8(64)
+  39               	.LVL3:
+  40 0014 00C0      		rjmp .L3
+  41               	.LVL4:
+  42               	.L4:
+  43               	.LM4:
+  44 0016 8330      		cpi r24,lo8(3)
+  45 0018 01F4      		brne .L5
+  46 001a 10E2      		ldi r17,lo8(32)
+  47               	.LVL5:
+  48 001c 00C0      		rjmp .L3
+  49               	.LVL6:
+  50               	.L5:
+  51 001e 10E0      		ldi r17,lo8(0)
+  52               	.LVL7:
+  53               	.L3:
+  54               	.LM5:
+  55 0020 8FE0      		ldi r24,lo8(15)
+  56               	.LVL8:
+  57 0022 60EE      		ldi r22,lo8(-32)
+  58 0024 412F      		mov r20,r17
+  59 0026 00D0      		rcall mcp2515_bit_modify
+  60               	.LM6:
+  61 0028 C12F      		mov r28,r17
+  62 002a D0E0      		ldi r29,lo8(0)
+  63               	.LVL9:
+  64               	.L6:
+  65 002c 8EE0      		ldi r24,lo8(14)
+  66 002e 00D0      		rcall mcp2515_read_register
+  67 0030 90E0      		ldi r25,lo8(0)
+  68 0032 807E      		andi r24,lo8(224)
+  69 0034 9070      		andi r25,hi8(224)
+  70 0036 8C17      		cp r24,r28
+  71 0038 9D07      		cpc r25,r29
+  72 003a 01F4      		brne .L6
+  73               	/* epilogue start */
+  74               	.LM7:
+  75 003c DF91      		pop r29
+  76               	.LVL10:
+  77 003e CF91      		pop r28
+  78               	.LVL11:
+  79 0040 1F91      		pop r17
+  80               	.LVL12:
+  81 0042 0895      		ret
+  82               	.LFE18:
+ 108               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 mcp2515_set_mode.c
+C:\Users\zag00046\AppData\Local\Temp/ccK7cGNT.s:2      *ABS*:0000003f __SREG__
+C:\Users\zag00046\AppData\Local\Temp/ccK7cGNT.s:3      *ABS*:0000003e __SP_H__
+C:\Users\zag00046\AppData\Local\Temp/ccK7cGNT.s:4      *ABS*:0000003d __SP_L__
+C:\Users\zag00046\AppData\Local\Temp/ccK7cGNT.s:5      *ABS*:00000034 __CCP__
+C:\Users\zag00046\AppData\Local\Temp/ccK7cGNT.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccK7cGNT.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccK7cGNT.s:18     .text:00000000 can_set_mode
+
+UNDEFINED SYMBOLS
+mcp2515_bit_modify
+mcp2515_read_register

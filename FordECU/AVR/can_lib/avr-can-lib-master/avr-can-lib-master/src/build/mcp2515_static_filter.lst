@@ -1,0 +1,120 @@
+   1               		.file	"mcp2515_static_filter.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	can_static_filter
+  18               	can_static_filter:
+  19               	.LFB18:
+  20               	.LM1:
+  21               	.LVL0:
+  22 0000 0F93      		push r16
+  23 0002 1F93      		push r17
+  24 0004 CF93      		push r28
+  25 0006 DF93      		push r29
+  26               	/* prologue: function */
+  27               	/* frame size = 0 */
+  28 0008 EC01      		movw r28,r24
+  29               	.LM2:
+  30 000a 8FE0      		ldi r24,lo8(15)
+  31               	.LVL1:
+  32 000c 60EE      		ldi r22,lo8(-32)
+  33 000e 40E8      		ldi r20,lo8(-128)
+  34 0010 00D0      		rcall mcp2515_bit_modify
+  35               	.L2:
+  36               	.LM3:
+  37 0012 8EE0      		ldi r24,lo8(14)
+  38 0014 00D0      		rcall mcp2515_read_register
+  39 0016 807E      		andi r24,lo8(-32)
+  40 0018 8038      		cpi r24,lo8(-128)
+  41 001a 01F4      		brne .L2
+  42               	.LM4:
+  43 001c 80E6      		ldi r24,lo8(96)
+  44 001e 64E0      		ldi r22,lo8(4)
+  45 0020 00D0      		rcall mcp2515_write_register
+  46               	.LM5:
+  47 0022 80E7      		ldi r24,lo8(112)
+  48 0024 60E0      		ldi r22,lo8(0)
+  49 0026 00D0      		rcall mcp2515_write_register
+  50 0028 00E0      		ldi r16,lo8(0)
+  51               	.LVL2:
+  52               	.L6:
+  53               	.LM6:
+  54 002a C298      		cbi 56-32,2
+  55               	.LM7:
+  56 002c 82E0      		ldi r24,lo8(2)
+  57 002e 00D0      		rcall spi_putc
+  58               	.LM8:
+  59 0030 802F      		mov r24,r16
+  60 0032 00D0      		rcall spi_putc
+  61 0034 10E0      		ldi r17,lo8(0)
+  62               	.L5:
+  63               	.LM9:
+  64 0036 0032      		cpi r16,lo8(32)
+  65 0038 01F4      		brne .L3
+  66 003a 1830      		cpi r17,lo8(8)
+  67 003c 00F4      		brsh .L4
+  68               	.L3:
+  69               	.LM10:
+  70 003e FE01      		movw r30,r28
+  71               	.LVL3:
+  72               	.LBB2:
+  73               	.LM11:
+  74 0040 2196      		adiw r28,1
+  75               	/* #APP */
+  76               	 ;  59 "mcp2515_static_filter.c" 1
+  77 0042 E491      		lpm r30, Z
+  78               		
+  79               	 ;  0 "" 2
+  80               	.LVL4:
+  81               	/* #NOAPP */
+  82               	.LBE2:
+  83 0044 8E2F      		mov r24,r30
+  84 0046 00D0      		rcall spi_putc
+  85               	.LVL5:
+  86               	.LM12:
+  87 0048 1F5F      		subi r17,lo8(-(1))
+  88 004a 1C30      		cpi r17,lo8(12)
+  89 004c 01F4      		brne .L5
+  90               	.L4:
+  91               	.LM13:
+  92 004e C29A      		sbi 56-32,2
+  93               	.LM14:
+  94 0050 005F      		subi r16,lo8(-(16))
+  95 0052 0033      		cpi r16,lo8(48)
+  96 0054 01F4      		brne .L6
+  97               	.LM15:
+  98 0056 8FE0      		ldi r24,lo8(15)
+  99 0058 60EE      		ldi r22,lo8(-32)
+ 100 005a 40E0      		ldi r20,lo8(0)
+ 101 005c 00D0      		rcall mcp2515_bit_modify
+ 102               	/* epilogue start */
+ 103               	.LM16:
+ 104 005e DF91      		pop r29
+ 105 0060 CF91      		pop r28
+ 106               	.LVL6:
+ 107 0062 1F91      		pop r17
+ 108               	.LVL7:
+ 109 0064 0F91      		pop r16
+ 110               	.LVL8:
+ 111 0066 0895      		ret
+ 112               	.LFE18:
+ 138               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 mcp2515_static_filter.c
+C:\Users\zag00046\AppData\Local\Temp/ccS9KXra.s:2      *ABS*:0000003f __SREG__
+C:\Users\zag00046\AppData\Local\Temp/ccS9KXra.s:3      *ABS*:0000003e __SP_H__
+C:\Users\zag00046\AppData\Local\Temp/ccS9KXra.s:4      *ABS*:0000003d __SP_L__
+C:\Users\zag00046\AppData\Local\Temp/ccS9KXra.s:5      *ABS*:00000034 __CCP__
+C:\Users\zag00046\AppData\Local\Temp/ccS9KXra.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccS9KXra.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccS9KXra.s:18     .text:00000000 can_static_filter
+
+UNDEFINED SYMBOLS
+mcp2515_bit_modify
+mcp2515_read_register
+mcp2515_write_register
+spi_putc

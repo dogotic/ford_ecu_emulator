@@ -1,0 +1,74 @@
+   1               		.file	"mcp2515_sleep.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	can_wakeup
+  18               	can_wakeup:
+  19               	.LFB19:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 8BE2      		ldi r24,lo8(43)
+  25 0002 60E4      		ldi r22,lo8(64)
+  26 0004 40E0      		ldi r20,lo8(0)
+  27 0006 00D0      		rcall mcp2515_bit_modify
+  28               	.LM3:
+  29 0008 8CE2      		ldi r24,lo8(44)
+  30 000a 60E4      		ldi r22,lo8(64)
+  31 000c 40E0      		ldi r20,lo8(0)
+  32 000e 00D0      		rcall mcp2515_bit_modify
+  33               	.LM4:
+  34 0010 8CE0      		ldi r24,lo8(12)
+  35 0012 60E2      		ldi r22,lo8(32)
+  36 0014 40E0      		ldi r20,lo8(0)
+  37 0016 00D0      		rcall mcp2515_bit_modify
+  38               	.LM5:
+  39 0018 82E0      		ldi r24,lo8(2)
+  40 001a 00D0      		rcall can_set_mode
+  41               	/* epilogue start */
+  42               	.LM6:
+  43 001c 0895      		ret
+  44               	.LFE19:
+  46               	.global	can_sleep
+  48               	can_sleep:
+  49               	.LFB18:
+  50               	.LM7:
+  51               	/* prologue: function */
+  52               	/* frame size = 0 */
+  53               	.LM8:
+  54 001e 8CE0      		ldi r24,lo8(12)
+  55 0020 60E2      		ldi r22,lo8(32)
+  56 0022 40E2      		ldi r20,lo8(32)
+  57 0024 00D0      		rcall mcp2515_bit_modify
+  58               	.LM9:
+  59 0026 83E0      		ldi r24,lo8(3)
+  60 0028 00D0      		rcall can_set_mode
+  61               	.LM10:
+  62 002a 8BE2      		ldi r24,lo8(43)
+  63 002c 60E4      		ldi r22,lo8(64)
+  64 002e 40E4      		ldi r20,lo8(64)
+  65 0030 00D0      		rcall mcp2515_bit_modify
+  66               	/* epilogue start */
+  67               	.LM11:
+  68 0032 0895      		ret
+  69               	.LFE18:
+ 103               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 mcp2515_sleep.c
+C:\Users\zag00046\AppData\Local\Temp/ccsMaY63.s:2      *ABS*:0000003f __SREG__
+C:\Users\zag00046\AppData\Local\Temp/ccsMaY63.s:3      *ABS*:0000003e __SP_H__
+C:\Users\zag00046\AppData\Local\Temp/ccsMaY63.s:4      *ABS*:0000003d __SP_L__
+C:\Users\zag00046\AppData\Local\Temp/ccsMaY63.s:5      *ABS*:00000034 __CCP__
+C:\Users\zag00046\AppData\Local\Temp/ccsMaY63.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccsMaY63.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccsMaY63.s:18     .text:00000000 can_wakeup
+C:\Users\zag00046\AppData\Local\Temp/ccsMaY63.s:48     .text:0000001e can_sleep
+
+UNDEFINED SYMBOLS
+mcp2515_bit_modify
+can_set_mode

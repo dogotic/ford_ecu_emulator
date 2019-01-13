@@ -1,0 +1,127 @@
+   1               		.file	"main.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	main
+  18               	main:
+  19               	.LFB2:
+  20               	.LM1:
+  21 0000 0F93      		push r16
+  22 0002 1F93      		push r17
+  23 0004 DF93      		push r29
+  24 0006 CF93      		push r28
+  25 0008 CDB7      		in r28,__SP_L__
+  26 000a DEB7      		in r29,__SP_H__
+  27 000c 6C97      		sbiw r28,28
+  28 000e 0FB6      		in __tmp_reg__,__SREG__
+  29 0010 F894      		cli
+  30 0012 DEBF      		out __SP_H__,r29
+  31 0014 0FBE      		out __SREG__,__tmp_reg__
+  32 0016 CDBF      		out __SP_L__,r28
+  33               	/* prologue: function */
+  34               	/* frame size = 28 */
+  35               	.LM2:
+  36 0018 87E0      		ldi r24,lo8(7)
+  37 001a 00D0      		rcall can_init
+  38               	.LM3:
+  39 001c 80E0      		ldi r24,lo8(can_filter)
+  40 001e 90E0      		ldi r25,hi8(can_filter)
+  41 0020 00D0      		rcall can_static_filter
+  42               	.LM4:
+  43 0022 83E2      		ldi r24,lo8(291)
+  44 0024 91E0      		ldi r25,hi8(291)
+  45 0026 A0E0      		ldi r26,hlo8(291)
+  46 0028 B0E0      		ldi r27,hhi8(291)
+  47 002a 8983      		std Y+1,r24
+  48 002c 9A83      		std Y+2,r25
+  49 002e AB83      		std Y+3,r26
+  50 0030 BC83      		std Y+4,r27
+  51               	.LM5:
+  52 0032 8D81      		ldd r24,Y+5
+  53               	.LM6:
+  54 0034 8C7F      		andi r24,lo8(-4)
+  55 0036 8D83      		std Y+5,r24
+  56               	.LM7:
+  57 0038 84E0      		ldi r24,lo8(4)
+  58 003a 8E83      		std Y+6,r24
+  59               	.LM8:
+  60 003c 8EED      		ldi r24,lo8(-34)
+  61 003e 8F83      		std Y+7,r24
+  62               	.LM9:
+  63 0040 8DEA      		ldi r24,lo8(-83)
+  64 0042 8887      		std Y+8,r24
+  65               	.LM10:
+  66 0044 8EEB      		ldi r24,lo8(-66)
+  67 0046 8987      		std Y+9,r24
+  68               	.LM11:
+  69 0048 8FEE      		ldi r24,lo8(-17)
+  70 004a 8A87      		std Y+10,r24
+  71               	.LM12:
+  72 004c CE01      		movw r24,r28
+  73 004e 0196      		adiw r24,1
+  74 0050 00D0      		rcall can_send_message
+  75               	.LBB2:
+  76               	.LM13:
+  77 0052 8E01      		movw r16,r28
+  78 0054 015F      		subi r16,lo8(-(15))
+  79 0056 1F4F      		sbci r17,hi8(-(15))
+  80               	.L6:
+  81               	.LBE2:
+  82               	.LM14:
+  83 0058 00D0      		rcall can_check_message
+  84 005a 8823      		tst r24
+  85 005c 01F0      		breq .L6
+  86               	.LBB3:
+  87               	.LM15:
+  88 005e C801      		movw r24,r16
+  89 0060 00D0      		rcall can_get_message
+  90 0062 8823      		tst r24
+  91 0064 01F0      		breq .L6
+  92               	.LM16:
+  93 0066 8F85      		ldd r24,Y+15
+  94 0068 9889      		ldd r25,Y+16
+  95 006a A989      		ldd r26,Y+17
+  96 006c BA89      		ldd r27,Y+18
+  97 006e 0A96      		adiw r24,10
+  98 0070 A11D      		adc r26,__zero_reg__
+  99 0072 B11D      		adc r27,__zero_reg__
+ 100 0074 8F87      		std Y+15,r24
+ 101 0076 988B      		std Y+16,r25
+ 102 0078 A98B      		std Y+17,r26
+ 103 007a BA8B      		std Y+18,r27
+ 104               	.LM17:
+ 105 007c C801      		movw r24,r16
+ 106 007e 00D0      		rcall can_send_message
+ 107 0080 00C0      		rjmp .L6
+ 108               	.LBE3:
+ 109               	.LFE2:
+ 111               	.global	can_filter
+ 112               		.section	.progmem.data,"a",@progbits
+ 115               	can_filter:
+ 116 0000 0000 0000 		.skip 32,0
+ 116      0000 0000 
+ 116      0000 0000 
+ 116      0000 0000 
+ 116      0000 0000 
+ 141               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\zag00046\AppData\Local\Temp/ccFeim4Z.s:2      *ABS*:0000003f __SREG__
+C:\Users\zag00046\AppData\Local\Temp/ccFeim4Z.s:3      *ABS*:0000003e __SP_H__
+C:\Users\zag00046\AppData\Local\Temp/ccFeim4Z.s:4      *ABS*:0000003d __SP_L__
+C:\Users\zag00046\AppData\Local\Temp/ccFeim4Z.s:5      *ABS*:00000034 __CCP__
+C:\Users\zag00046\AppData\Local\Temp/ccFeim4Z.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccFeim4Z.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccFeim4Z.s:18     .text:00000000 main
+C:\Users\zag00046\AppData\Local\Temp/ccFeim4Z.s:115    .progmem.data:00000000 can_filter
+
+UNDEFINED SYMBOLS
+can_init
+can_static_filter
+can_send_message
+can_check_message
+can_get_message

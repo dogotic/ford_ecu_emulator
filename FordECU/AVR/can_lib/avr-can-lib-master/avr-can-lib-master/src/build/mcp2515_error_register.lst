@@ -1,0 +1,41 @@
+   1               		.file	"mcp2515_error_register.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	can_read_error_register
+  18               	can_read_error_register:
+  19               	.LFB18:
+  20               	.LM1:
+  21 0000 1F93      		push r17
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LM2:
+  25 0002 8CE1      		ldi r24,lo8(28)
+  26 0004 00D0      		rcall mcp2515_read_register
+  27 0006 182F      		mov r17,r24
+  28               	.LM3:
+  29 0008 8DE1      		ldi r24,lo8(29)
+  30 000a 00D0      		rcall mcp2515_read_register
+  31               	.LM4:
+  32 000c 912F      		mov r25,r17
+  33               	/* epilogue start */
+  34 000e 1F91      		pop r17
+  35 0010 0895      		ret
+  36               	.LFE18:
+  62               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 mcp2515_error_register.c
+C:\Users\zag00046\AppData\Local\Temp/ccS7udKD.s:2      *ABS*:0000003f __SREG__
+C:\Users\zag00046\AppData\Local\Temp/ccS7udKD.s:3      *ABS*:0000003e __SP_H__
+C:\Users\zag00046\AppData\Local\Temp/ccS7udKD.s:4      *ABS*:0000003d __SP_L__
+C:\Users\zag00046\AppData\Local\Temp/ccS7udKD.s:5      *ABS*:00000034 __CCP__
+C:\Users\zag00046\AppData\Local\Temp/ccS7udKD.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccS7udKD.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccS7udKD.s:18     .text:00000000 can_read_error_register
+
+UNDEFINED SYMBOLS
+mcp2515_read_register

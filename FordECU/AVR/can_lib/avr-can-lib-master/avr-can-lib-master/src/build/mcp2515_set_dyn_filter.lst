@@ -1,0 +1,271 @@
+   1               		.file	"mcp2515_set_dyn_filter.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	can_set_filter
+  18               	can_set_filter:
+  19               	.LFB18:
+  20               	.LM1:
+  21               	.LVL0:
+  22 0000 DF92      		push r13
+  23 0002 EF92      		push r14
+  24 0004 FF92      		push r15
+  25 0006 0F93      		push r16
+  26 0008 1F93      		push r17
+  27 000a CF93      		push r28
+  28 000c DF93      		push r29
+  29               	/* prologue: function */
+  30               	/* frame size = 0 */
+  31 000e 082F      		mov r16,r24
+  32 0010 7B01      		movw r14,r22
+  33               	.LM2:
+  34 0012 8EE0      		ldi r24,lo8(14)
+  35               	.LVL1:
+  36 0014 00D0      		rcall mcp2515_read_register
+  37               	.LVL2:
+  38 0016 D82E      		mov r13,r24
+  39               	.LVL3:
+  40               	.LM3:
+  41 0018 0630      		cpi r16,lo8(6)
+  42 001a 00F0      		brlo .L2
+  43 001c 80E0      		ldi r24,lo8(0)
+  44 001e 00C0      		rjmp .L3
+  45               	.L2:
+  46               	.LBB38:
+  47               	.LBB39:
+  48               	.LM4:
+  49 0020 8FE0      		ldi r24,lo8(15)
+  50 0022 60EE      		ldi r22,lo8(-32)
+  51 0024 40E8      		ldi r20,lo8(-128)
+  52 0026 00D0      		rcall mcp2515_bit_modify
+  53               	.LM5:
+  54 0028 C0E8      		ldi r28,lo8(128)
+  55 002a D0E0      		ldi r29,hi8(128)
+  56               	.L4:
+  57               	.LBE39:
+  58 002c 8EE0      		ldi r24,lo8(14)
+  59 002e 00D0      		rcall mcp2515_read_register
+  60               	.LBB40:
+  61 0030 8C27      		eor r24,r28
+  62 0032 807E      		andi r24,lo8(-32)
+  63 0034 01F4      		brne .L4
+  64               	.LBE40:
+  65               	.LBE38:
+  66               	.LM6:
+  67 0036 0023      		tst r16
+  68 0038 01F4      		brne .L5
+  69               	.LM7:
+  70 003a F701      		movw r30,r14
+  71 003c 8085      		ldd r24,Z+8
+  72 003e 8C70      		andi r24,lo8(12)
+  73 0040 8C30      		cpi r24,lo8(12)
+  74 0042 01F4      		brne .L6
+  75               	.LM8:
+  76 0044 80E6      		ldi r24,lo8(96)
+  77 0046 60E4      		ldi r22,lo8(64)
+  78 0048 00C0      		rjmp .L20
+  79               	.L6:
+  80               	.LM9:
+  81 004a 8830      		cpi r24,lo8(8)
+  82 004c 01F4      		brne .L8
+  83               	.LM10:
+  84 004e 80E6      		ldi r24,lo8(96)
+  85 0050 60E2      		ldi r22,lo8(32)
+  86               	.L20:
+  87 0052 00D0      		rcall mcp2515_write_register
+  88 0054 10E2      		ldi r17,lo8(32)
+  89               	.LVL4:
+  90 0056 00C0      		rjmp .L7
+  91               	.LVL5:
+  92               	.L8:
+  93               	.LM11:
+  94 0058 80E6      		ldi r24,lo8(96)
+  95 005a 60E0      		ldi r22,lo8(0)
+  96 005c 00C0      		rjmp .L20
+  97               	.L5:
+  98               	.LM12:
+  99 005e 0230      		cpi r16,lo8(2)
+ 100 0060 01F4      		brne .L9
+ 101               	.LM13:
+ 102 0062 F701      		movw r30,r14
+ 103 0064 8085      		ldd r24,Z+8
+ 104 0066 8C70      		andi r24,lo8(12)
+ 105 0068 8C30      		cpi r24,lo8(12)
+ 106 006a 01F4      		brne .L10
+ 107               	.LM14:
+ 108 006c 80E7      		ldi r24,lo8(112)
+ 109 006e 60E4      		ldi r22,lo8(64)
+ 110 0070 00C0      		rjmp .L21
+ 111               	.L10:
+ 112               	.LM15:
+ 113 0072 8830      		cpi r24,lo8(8)
+ 114 0074 01F4      		brne .L11
+ 115               	.LM16:
+ 116 0076 80E7      		ldi r24,lo8(112)
+ 117 0078 60E2      		ldi r22,lo8(32)
+ 118 007a 00C0      		rjmp .L21
+ 119               	.L11:
+ 120               	.LM17:
+ 121 007c 80E7      		ldi r24,lo8(112)
+ 122 007e 60E0      		ldi r22,lo8(0)
+ 123               	.L21:
+ 124 0080 00D0      		rcall mcp2515_write_register
+ 125 0082 14E2      		ldi r17,lo8(36)
+ 126               	.LVL6:
+ 127               	.L7:
+ 128               	.LM18:
+ 129 0084 C298      		cbi 56-32,2
+ 130               	.LM19:
+ 131 0086 82E0      		ldi r24,lo8(2)
+ 132 0088 00D0      		rcall spi_putc
+ 133               	.LM20:
+ 134 008a 812F      		mov r24,r17
+ 135 008c 00D0      		rcall spi_putc
+ 136               	.LM21:
+ 137 008e 9701      		movw r18,r14
+ 138 0090 2C5F      		subi r18,lo8(-(4))
+ 139 0092 3F4F      		sbci r19,hi8(-(4))
+ 140 0094 60E0      		ldi r22,lo8(0)
+ 141 0096 F701      		movw r30,r14
+ 142 0098 8085      		ldd r24,Z+8
+ 143 009a 8C70      		andi r24,lo8(12)
+ 144 009c 8830      		cpi r24,lo8(8)
+ 145 009e 01F0      		breq .L12
+ 146 00a0 61E0      		ldi r22,lo8(1)
+ 147               	.L12:
+ 148 00a2 C901      		movw r24,r18
+ 149 00a4 00D0      		rcall mcp2515_write_id
+ 150               	.LM22:
+ 151 00a6 C29A      		sbi 56-32,2
+ 152               	.LBB41:
+ 153               	.LBB42:
+ 154               	.LBB43:
+ 155               	.LBB44:
+ 156               	.LM23:
+ 157 00a8 85E0      		ldi r24,lo8(5)
+ 158               	.LVL7:
+ 159               	/* #APP */
+ 160               	 ;  83 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 161 00aa 8A95      		1: dec r24
+ 162 00ac 01F4      		brne 1b
+ 163               	 ;  0 "" 2
+ 164               	/* #NOAPP */
+ 165               	.L9:
+ 166               	.LBE44:
+ 167               	.LBE43:
+ 168               	.LBE42:
+ 169               	.LBE41:
+ 170               	.LM24:
+ 171 00ae 0330      		cpi r16,lo8(3)
+ 172 00b0 00F4      		brsh .L13
+ 173 00b2 10E0      		ldi r17,lo8(0)
+ 174               	.LVL8:
+ 175 00b4 00C0      		rjmp .L14
+ 176               	.LVL9:
+ 177               	.L13:
+ 178               	.LM25:
+ 179 00b6 0350      		subi r16,lo8(-(-3))
+ 180 00b8 10E1      		ldi r17,lo8(16)
+ 181               	.LVL10:
+ 182               	.L14:
+ 183               	.LM26:
+ 184 00ba C298      		cbi 56-32,2
+ 185               	.LM27:
+ 186 00bc 82E0      		ldi r24,lo8(2)
+ 187               	.LVL11:
+ 188 00be 00D0      		rcall spi_putc
+ 189               	.LM28:
+ 190 00c0 000F      		lsl r16
+ 191 00c2 000F      		lsl r16
+ 192 00c4 802F      		mov r24,r16
+ 193 00c6 812B      		or r24,r17
+ 194 00c8 00D0      		rcall spi_putc
+ 195               	.LM29:
+ 196 00ca 60E0      		ldi r22,lo8(0)
+ 197 00cc F701      		movw r30,r14
+ 198 00ce 8085      		ldd r24,Z+8
+ 199 00d0 8C70      		andi r24,lo8(12)
+ 200 00d2 8830      		cpi r24,lo8(8)
+ 201 00d4 01F0      		breq .L15
+ 202 00d6 61E0      		ldi r22,lo8(1)
+ 203               	.L15:
+ 204 00d8 C701      		movw r24,r14
+ 205 00da 00D0      		rcall mcp2515_write_id
+ 206               	.LM30:
+ 207 00dc C29A      		sbi 56-32,2
+ 208               	.LBB45:
+ 209               	.LBB46:
+ 210               	.LBB47:
+ 211               	.LBB48:
+ 212               	.LM31:
+ 213 00de 85E0      		ldi r24,lo8(5)
+ 214               	.LVL12:
+ 215               	/* #APP */
+ 216               	 ;  83 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 217 00e0 8A95      		1: dec r24
+ 218 00e2 01F4      		brne 1b
+ 219               	 ;  0 "" 2
+ 220               	/* #NOAPP */
+ 221               	.LBE48:
+ 222               	.LBE47:
+ 223               	.LBE46:
+ 224               	.LBE45:
+ 225               	.LBB49:
+ 226               	.LBB50:
+ 227               	.LM32:
+ 228 00e4 8FE0      		ldi r24,lo8(15)
+ 229               	.LVL13:
+ 230 00e6 60EE      		ldi r22,lo8(-32)
+ 231 00e8 4D2D      		mov r20,r13
+ 232 00ea 00D0      		rcall mcp2515_bit_modify
+ 233               	.LM33:
+ 234 00ec 1D2D      		mov r17,r13
+ 235               	.LVL14:
+ 236               	.L16:
+ 237               	.LBE50:
+ 238 00ee 8EE0      		ldi r24,lo8(14)
+ 239 00f0 00D0      		rcall mcp2515_read_register
+ 240               	.LBB51:
+ 241 00f2 8127      		eor r24,r17
+ 242 00f4 807E      		andi r24,lo8(-32)
+ 243 00f6 01F4      		brne .L16
+ 244 00f8 81E0      		ldi r24,lo8(1)
+ 245               	.LVL15:
+ 246               	.L3:
+ 247               	/* epilogue start */
+ 248               	.LBE51:
+ 249               	.LBE49:
+ 250               	.LM34:
+ 251 00fa DF91      		pop r29
+ 252 00fc CF91      		pop r28
+ 253 00fe 1F91      		pop r17
+ 254 0100 0F91      		pop r16
+ 255               	.LVL16:
+ 256 0102 FF90      		pop r15
+ 257 0104 EF90      		pop r14
+ 258               	.LVL17:
+ 259 0106 DF90      		pop r13
+ 260               	.LVL18:
+ 261 0108 0895      		ret
+ 262               	.LFE18:
+ 288               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 mcp2515_set_dyn_filter.c
+C:\Users\zag00046\AppData\Local\Temp/ccF1NyY3.s:2      *ABS*:0000003f __SREG__
+C:\Users\zag00046\AppData\Local\Temp/ccF1NyY3.s:3      *ABS*:0000003e __SP_H__
+C:\Users\zag00046\AppData\Local\Temp/ccF1NyY3.s:4      *ABS*:0000003d __SP_L__
+C:\Users\zag00046\AppData\Local\Temp/ccF1NyY3.s:5      *ABS*:00000034 __CCP__
+C:\Users\zag00046\AppData\Local\Temp/ccF1NyY3.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccF1NyY3.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccF1NyY3.s:18     .text:00000000 can_set_filter
+
+UNDEFINED SYMBOLS
+mcp2515_read_register
+mcp2515_bit_modify
+mcp2515_write_register
+spi_putc
+mcp2515_write_id

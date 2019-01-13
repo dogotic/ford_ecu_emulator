@@ -1,0 +1,57 @@
+   1               		.file	"spi.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	mcp2515_spi_init
+  18               	mcp2515_spi_init:
+  19               	.LFB18:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 81E5      		ldi r24,lo8(81)
+  25 0002 8DB9      		out 45-32,r24
+  26               	.LM3:
+  27 0004 81E0      		ldi r24,lo8(1)
+  28 0006 8EB9      		out 46-32,r24
+  29               	/* epilogue start */
+  30               	.LM4:
+  31 0008 0895      		ret
+  32               	.LFE18:
+  34               	.global	spi_putc
+  36               	spi_putc:
+  37               	.LFB19:
+  38               	.LM5:
+  39               	.LVL0:
+  40               	/* prologue: function */
+  41               	/* frame size = 0 */
+  42               	.LM6:
+  43 000a 8FB9      		out 47-32,r24
+  44               	.L4:
+  45               	.LM7:
+  46 000c 779B      		sbis 46-32,7
+  47 000e 00C0      		rjmp .L4
+  48               	.LM8:
+  49 0010 8FB1      		in r24,47-32
+  50               	.LVL1:
+  51               	/* epilogue start */
+  52               	.LM9:
+  53 0012 0895      		ret
+  54               	.LFE19:
+  88               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 spi.c
+C:\Users\zag00046\AppData\Local\Temp/ccYWU7P9.s:2      *ABS*:0000003f __SREG__
+C:\Users\zag00046\AppData\Local\Temp/ccYWU7P9.s:3      *ABS*:0000003e __SP_H__
+C:\Users\zag00046\AppData\Local\Temp/ccYWU7P9.s:4      *ABS*:0000003d __SP_L__
+C:\Users\zag00046\AppData\Local\Temp/ccYWU7P9.s:5      *ABS*:00000034 __CCP__
+C:\Users\zag00046\AppData\Local\Temp/ccYWU7P9.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccYWU7P9.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\zag00046\AppData\Local\Temp/ccYWU7P9.s:18     .text:00000000 mcp2515_spi_init
+C:\Users\zag00046\AppData\Local\Temp/ccYWU7P9.s:36     .text:0000000a spi_putc
+
+NO UNDEFINED SYMBOLS

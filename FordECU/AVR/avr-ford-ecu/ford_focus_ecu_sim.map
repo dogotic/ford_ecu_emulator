@@ -1,0 +1,579 @@
+Archive member included because of file (symbol)
+
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+                              build/main.o (can_init)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_buffer.o)
+                              build/main.o (can_check_message)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_get_message.o)
+                              build/main.o (can_get_message)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_send_message.o)
+                              build/main.o (can_send_message)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_static_filter.o)
+                              build/main.o (can_static_filter)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_write_id.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_send_message.o) (mcp2515_write_id)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_read_id.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_get_message.o) (mcp2515_read_id)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(spi.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o) (mcp2515_spi_init)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o (exit)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_clear_bss.o)
+                              build/main.o (__do_clear_bss)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00002000         xr
+data             0x00800060         0x0000ffa0         rw !x
+eeprom           0x00810000         0x00010000         rw !x
+fuse             0x00820000         0x00000400         rw !x
+lock             0x00830000         0x00000400         rw !x
+signature        0x00840000         0x00000400         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+LOAD build/main.o
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4\libm.a
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4\libc.a
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00000000      0x8e0
+ *(.vectors)
+ .vectors       0x00000000       0x26 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+                0x00000000                __vectors
+                0x00000000                __vector_default
+ *(.vectors)
+ *(.progmem.gcc*)
+ *(.progmem*)
+ .progmem.data  0x00000026       0x20 build/main.o
+                0x00000026                can_filter
+ .progmem.data  0x00000046       0x18 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+                0x00000046                _mcp2515_cnf
+                0x0000005e                . = ALIGN (0x2)
+                0x0000005e                __trampolines_start = .
+ *(.trampolines)
+ .trampolines   0x0000005e        0x0 linker stubs
+ *(.trampolines*)
+                0x0000005e                __trampolines_end = .
+ *(.jumptables)
+ *(.jumptables*)
+ *(.lowtext)
+ *(.lowtext*)
+                0x0000005e                __ctors_start = .
+ *(.ctors)
+                0x0000005e                __ctors_end = .
+                0x0000005e                __dtors_start = .
+ *(.dtors)
+                0x0000005e                __dtors_end = .
+ SORT(*)(.ctors)
+ SORT(*)(.dtors)
+ *(.init0)
+ .init0         0x0000005e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+                0x0000005e                __init
+ *(.init0)
+ *(.init1)
+ *(.init1)
+ *(.init2)
+ .init2         0x0000005e        0xc c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+ *(.init2)
+ *(.init3)
+ *(.init3)
+ *(.init4)
+ .init4         0x0000006a       0x10 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_clear_bss.o)
+                0x0000006a                __do_clear_bss
+ *(.init4)
+ *(.init5)
+ *(.init5)
+ *(.init6)
+ *(.init6)
+ *(.init7)
+ *(.init7)
+ *(.init8)
+ *(.init8)
+ *(.init9)
+ .init9         0x0000007a        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+ *(.init9)
+ *(.text)
+ .text          0x0000007e        0x2 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+                0x0000007e                __vector_1
+                0x0000007e                __vector_12
+                0x0000007e                __bad_interrupt
+                0x0000007e                __vector_6
+                0x0000007e                __vector_3
+                0x0000007e                __vector_11
+                0x0000007e                __vector_13
+                0x0000007e                __vector_17
+                0x0000007e                __vector_7
+                0x0000007e                __vector_5
+                0x0000007e                __vector_4
+                0x0000007e                __vector_9
+                0x0000007e                __vector_2
+                0x0000007e                __vector_15
+                0x0000007e                __vector_8
+                0x0000007e                __vector_14
+                0x0000007e                __vector_10
+                0x0000007e                __vector_16
+                0x0000007e                __vector_18
+ .text          0x00000080      0x474 build/main.o
+                0x00000080                main
+ .text          0x000004f4      0x116 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+                0x0000055e                can_init
+                0x00000528                mcp2515_read_register
+                0x00000500                mcp2515_bit_modify
+                0x000004f4                mcp2515_read_status
+                0x00000540                mcp2515_write_register
+ .text          0x0000060a       0x1a c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_buffer.o)
+                0x00000612                can_check_free_buffer
+                0x0000060a                can_check_message
+ .text          0x00000624       0xaa c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_get_message.o)
+                0x00000624                can_get_message
+ .text          0x000006ce       0x92 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_send_message.o)
+                0x000006ce                can_send_message
+ .text          0x00000760       0x68 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_static_filter.o)
+                0x00000760                can_static_filter
+ .text          0x000007c8       0x6a c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_write_id.o)
+                0x000007c8                mcp2515_write_id
+ .text          0x00000832       0x96 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_read_id.o)
+                0x00000832                mcp2515_read_id
+ .text          0x000008c8       0x14 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(spi.o)
+                0x000008c8                mcp2515_spi_init
+                0x000008d2                spi_putc
+ .text          0x000008dc        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+ .text          0x000008dc        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_clear_bss.o)
+                0x000008dc                . = ALIGN (0x2)
+ *(.text.*)
+ .text.libgcc   0x000008dc        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+ .text.libgcc   0x000008dc        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_clear_bss.o)
+                0x000008dc                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x000008dc        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+                0x000008dc                exit
+                0x000008dc                _exit
+ *(.fini9)
+ *(.fini8)
+ *(.fini8)
+ *(.fini7)
+ *(.fini7)
+ *(.fini6)
+ *(.fini6)
+ *(.fini5)
+ *(.fini5)
+ *(.fini4)
+ *(.fini4)
+ *(.fini3)
+ *(.fini3)
+ *(.fini2)
+ *(.fini2)
+ *(.fini1)
+ *(.fini1)
+ *(.fini0)
+ .fini0         0x000008dc        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+ *(.fini0)
+                0x000008e0                _etext = .
+
+.data           0x00800060        0x0 load address 0x000008e0
+                0x00800060                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+ .data          0x00800060        0x0 build/main.o
+ .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+ .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_buffer.o)
+ .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_get_message.o)
+ .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_send_message.o)
+ .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_static_filter.o)
+ .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_write_id.o)
+ .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_read_id.o)
+ .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(spi.o)
+ .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+ .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_clear_bss.o)
+ *(.data*)
+ *(.rodata)
+ *(.rodata*)
+ *(.gnu.linkonce.d*)
+                0x00800060                . = ALIGN (0x2)
+                0x00800060                _edata = .
+                0x00800060                PROVIDE (__data_end, .)
+
+.bss            0x00800060        0x6
+                0x00800060                PROVIDE (__bss_start, .)
+ *(.bss)
+ .bss           0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+ .bss           0x00800060        0x6 build/main.o
+                0x00800064                engine_fan_speed
+                0x00800060                ect_voltage
+                0x00800062                ect_temperature
+ .bss           0x00800066        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+ .bss           0x00800066        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_buffer.o)
+ .bss           0x00800066        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_get_message.o)
+ .bss           0x00800066        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_send_message.o)
+ .bss           0x00800066        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_static_filter.o)
+ .bss           0x00800066        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_write_id.o)
+ .bss           0x00800066        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_read_id.o)
+ .bss           0x00800066        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(spi.o)
+ .bss           0x00800066        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+ .bss           0x00800066        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_clear_bss.o)
+ *(.bss*)
+ *(COMMON)
+                0x00800066                PROVIDE (__bss_end, .)
+                0x000008e0                __data_load_start = LOADADDR (.data)
+                0x000008e0                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x00800066        0x0
+                0x00800066                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x00800066                PROVIDE (__noinit_end, .)
+                0x00800066                _end = .
+                0x00800066                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.fuse
+ *(.fuse)
+ *(.lfuse)
+ *(.hfuse)
+ *(.efuse)
+
+.lock
+ *(.lock*)
+
+.signature
+ *(.signature*)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment
+ *(.comment)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000      0x120
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x20 build/main.o
+ .debug_aranges
+                0x00000020       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+ .debug_aranges
+                0x00000040       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_buffer.o)
+ .debug_aranges
+                0x00000060       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_get_message.o)
+ .debug_aranges
+                0x00000080       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_send_message.o)
+ .debug_aranges
+                0x000000a0       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_static_filter.o)
+ .debug_aranges
+                0x000000c0       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_write_id.o)
+ .debug_aranges
+                0x000000e0       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_read_id.o)
+ .debug_aranges
+                0x00000100       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(spi.o)
+
+.debug_pubnames
+                0x00000000      0x22f
+ *(.debug_pubnames)
+ .debug_pubnames
+                0x00000000       0x63 build/main.o
+ .debug_pubnames
+                0x00000063       0x94 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+ .debug_pubnames
+                0x000000f7       0x42 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_buffer.o)
+ .debug_pubnames
+                0x00000139       0x26 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_get_message.o)
+ .debug_pubnames
+                0x0000015f       0x27 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_send_message.o)
+ .debug_pubnames
+                0x00000186       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_static_filter.o)
+ .debug_pubnames
+                0x000001ae       0x27 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_write_id.o)
+ .debug_pubnames
+                0x000001d5       0x26 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_read_id.o)
+ .debug_pubnames
+                0x000001fb       0x34 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(spi.o)
+
+.debug_info     0x00000000      0xedf
+ *(.debug_info)
+ .debug_info    0x00000000      0x2cf build/main.o
+ .debug_info    0x000002cf      0x30a c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+ .debug_info    0x000005d9       0xb2 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_buffer.o)
+ .debug_info    0x0000068b      0x181 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_get_message.o)
+ .debug_info    0x0000080c      0x26c c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_send_message.o)
+ .debug_info    0x00000a78       0xef c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_static_filter.o)
+ .debug_info    0x00000b67      0x13c c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_write_id.o)
+ .debug_info    0x00000ca3      0x191 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_read_id.o)
+ .debug_info    0x00000e34       0xab c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(spi.o)
+ *(.gnu.linkonce.wi.*)
+
+.debug_abbrev   0x00000000      0x895
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000      0x16e build/main.o
+ .debug_abbrev  0x0000016e      0x144 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+ .debug_abbrev  0x000002b2       0x7b c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_buffer.o)
+ .debug_abbrev  0x0000032d      0x10c c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_get_message.o)
+ .debug_abbrev  0x00000439      0x173 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_send_message.o)
+ .debug_abbrev  0x000005ac       0x9d c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_static_filter.o)
+ .debug_abbrev  0x00000649       0xe8 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_write_id.o)
+ .debug_abbrev  0x00000731       0xe9 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_read_id.o)
+ .debug_abbrev  0x0000081a       0x7b c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(spi.o)
+
+.debug_line     0x00000000     0x15b8
+ *(.debug_line)
+ .debug_line    0x00000000      0xaaf build/main.o
+ .debug_line    0x00000aaf      0x2d4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+ .debug_line    0x00000d83       0xbb c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_buffer.o)
+ .debug_line    0x00000e3e      0x13c c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_get_message.o)
+ .debug_line    0x00000f7a      0x1a1 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_send_message.o)
+ .debug_line    0x0000111b      0x114 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_static_filter.o)
+ .debug_line    0x0000122f      0x13e c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_write_id.o)
+ .debug_line    0x0000136d      0x183 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_read_id.o)
+ .debug_line    0x000014f0       0xc8 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(spi.o)
+
+.debug_frame    0x00000000      0x180
+ *(.debug_frame)
+ .debug_frame   0x00000000       0x20 build/main.o
+ .debug_frame   0x00000020       0x60 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+ .debug_frame   0x00000080       0x30 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_buffer.o)
+ .debug_frame   0x000000b0       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_get_message.o)
+ .debug_frame   0x000000d0       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_send_message.o)
+ .debug_frame   0x000000f0       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_static_filter.o)
+ .debug_frame   0x00000110       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_write_id.o)
+ .debug_frame   0x00000130       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_read_id.o)
+ .debug_frame   0x00000150       0x30 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(spi.o)
+
+.debug_str      0x00000000      0x417
+ *(.debug_str)
+ .debug_str     0x00000000      0x1b8 build/main.o
+                                0x1ec (size before relaxing)
+ .debug_str     0x000001b8      0x105 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+                                0x24b (size before relaxing)
+ .debug_str     0x000002bd       0x39 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_buffer.o)
+                                0x10d (size before relaxing)
+ .debug_str     0x000002f6       0x2b c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_get_message.o)
+                                0x123 (size before relaxing)
+ .debug_str     0x00000321       0x4d c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_send_message.o)
+                                0x188 (size before relaxing)
+ .debug_str     0x0000036e       0x2a c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_static_filter.o)
+                                0x113 (size before relaxing)
+ .debug_str     0x00000398       0x37 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_write_id.o)
+                                0x115 (size before relaxing)
+ .debug_str     0x000003cf       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_read_id.o)
+                                0x110 (size before relaxing)
+ .debug_str     0x000003f7       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(spi.o)
+                                 0xec (size before relaxing)
+
+.debug_loc      0x00000000      0x50b
+ *(.debug_loc)
+ .debug_loc     0x00000000       0xf8 build/main.o
+ .debug_loc     0x000000f8      0x177 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+ .debug_loc     0x0000026f       0xab c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_get_message.o)
+ .debug_loc     0x0000031a       0x95 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_send_message.o)
+ .debug_loc     0x000003af       0x79 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_static_filter.o)
+ .debug_loc     0x00000428       0x46 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_write_id.o)
+ .debug_loc     0x0000046e       0x8a c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_read_id.o)
+ .debug_loc     0x000004f8       0x13 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(spi.o)
+
+.debug_macinfo
+ *(.debug_macinfo)
+OUTPUT(ford_focus_ecu_sim.elf elf32-avr)
+LOAD linker stubs
+
+.debug_ranges   0x00000000       0x20
+ .debug_ranges  0x00000000       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+
+Cross Reference Table
+
+Symbol                                            File
+__bad_interrupt                                   c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__bss_end                                         c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_clear_bss.o)
+__bss_start                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_clear_bss.o)
+__do_clear_bss                                    c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_clear_bss.o)
+                                                  build/main.o
+__heap_end                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__init                                            c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__stack                                           c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_1                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_10                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_11                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_12                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_13                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_14                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_15                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_16                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_17                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_18                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_2                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_3                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_4                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_5                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_6                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_7                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_8                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_9                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vector_default                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+__vectors                                         c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+_exit                                             c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+_mcp2515_cnf                                      c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+can_check_free_buffer                             c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_buffer.o)
+can_check_message                                 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_buffer.o)
+                                                  build/main.o
+can_filter                                        build/main.o
+can_get_message                                   c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_get_message.o)
+                                                  build/main.o
+can_init                                          c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+                                                  build/main.o
+can_send_message                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_send_message.o)
+                                                  build/main.o
+can_static_filter                                 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_static_filter.o)
+                                                  build/main.o
+ect_temperature                                   build/main.o
+ect_voltage                                       build/main.o
+engine_fan_speed                                  build/main.o
+exit                                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+main                                              build/main.o
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm8.o
+mcp2515_bit_modify                                c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_static_filter.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_get_message.o)
+mcp2515_read_id                                   c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_read_id.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_get_message.o)
+mcp2515_read_register                             c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_static_filter.o)
+mcp2515_read_status                               c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_send_message.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_get_message.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_buffer.o)
+mcp2515_spi_init                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(spi.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+mcp2515_write_id                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_write_id.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_send_message.o)
+mcp2515_write_register                            c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_static_filter.o)
+spi_putc                                          c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(spi.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_read_id.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_write_id.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_static_filter.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_send_message.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515_get_message.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib\libcan.a(mcp2515.o)

@@ -1,0 +1,334 @@
+   1               		.file	"can_buffer.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	can_buffer_init
+  18               	can_buffer_init:
+  19               	.LFB15:
+  20               	.LM1:
+  21               	.LVL0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24 0000 FC01      		movw r30,r24
+  25               	.LBB27:
+  26               	.LM2:
+  27 0002 8FB7      		in r24,__SREG__
+  28               	.LVL1:
+  29               	.LBB28:
+  30               	.LBB29:
+  31               	.LM3:
+  32               	/* #APP */
+  33               	 ;  50 "c:/winavr-20100110/lib/gcc/../../avr/include/util/atomic.h" 1
+  34 0004 F894      		cli
+  35               	 ;  0 "" 2
+  36               	/* #NOAPP */
+  37               	.LBE29:
+  38               	.LBE28:
+  39               	.LM4:
+  40 0006 6283      		std Z+2,r22
+  41               	.LM5:
+  42 0008 5183      		std Z+1,r21
+  43 000a 4083      		st Z,r20
+  44               	.LM6:
+  45 000c 1482      		std Z+4,__zero_reg__
+  46               	.LM7:
+  47 000e 1582      		std Z+5,__zero_reg__
+  48               	.LM8:
+  49 0010 1382      		std Z+3,__zero_reg__
+  50               	.LBB30:
+  51               	.LBB31:
+  52               	.LM9:
+  53 0012 8FBF      		out __SREG__,r24
+  54               	.LM10:
+  55               	/* epilogue start */
+  56               	.LBE31:
+  57               	.LBE30:
+  58               	.LBE27:
+  59               	.LM11:
+  60 0014 0895      		ret
+  61               	.LFE15:
+  63               	.global	can_buffer_empty
+  65               	can_buffer_empty:
+  66               	.LFB16:
+  67               	.LM12:
+  68               	.LVL2:
+  69               	/* prologue: function */
+  70               	/* frame size = 0 */
+  71 0016 FC01      		movw r30,r24
+  72               	.LBB32:
+  73               	.LM13:
+  74 0018 8FB7      		in r24,__SREG__
+  75               	.LVL3:
+  76               	.LBB33:
+  77               	.LBB34:
+  78               	.LM14:
+  79               	/* #APP */
+  80               	 ;  50 "c:/winavr-20100110/lib/gcc/../../avr/include/util/atomic.h" 1
+  81 001a F894      		cli
+  82               	 ;  0 "" 2
+  83               	/* #NOAPP */
+  84               	.LBE34:
+  85               	.LBE33:
+  86               	.LM15:
+  87 001c 9381      		ldd r25,Z+3
+  88               	.LVL4:
+  89               	.LBB35:
+  90               	.LBB36:
+  91               	.LM16:
+  92 001e 8FBF      		out __SREG__,r24
+  93               	.LM17:
+  94               	.LM18:
+  95 0020 80E0      		ldi r24,lo8(0)
+  96               	.LVL5:
+  97 0022 9923      		tst r25
+  98 0024 01F4      		brne .L4
+  99 0026 81E0      		ldi r24,lo8(1)
+ 100               	.L4:
+ 101               	.LBE36:
+ 102               	.LBE35:
+ 103               	.LBE32:
+ 104               	.LM19:
+ 105 0028 0895      		ret
+ 106               	.LFE16:
+ 108               	.global	can_buffer_full
+ 110               	can_buffer_full:
+ 111               	.LFB17:
+ 112               	.LM20:
+ 113               	.LVL6:
+ 114               	/* prologue: function */
+ 115               	/* frame size = 0 */
+ 116 002a FC01      		movw r30,r24
+ 117               	.LBB37:
+ 118               	.LM21:
+ 119 002c 8FB7      		in r24,__SREG__
+ 120               	.LVL7:
+ 121               	.LBB38:
+ 122               	.LBB39:
+ 123               	.LM22:
+ 124               	/* #APP */
+ 125               	 ;  50 "c:/winavr-20100110/lib/gcc/../../avr/include/util/atomic.h" 1
+ 126 002e F894      		cli
+ 127               	 ;  0 "" 2
+ 128               	/* #NOAPP */
+ 129               	.LBE39:
+ 130               	.LBE38:
+ 131               	.LM23:
+ 132 0030 2381      		ldd r18,Z+3
+ 133               	.LVL8:
+ 134               	.LM24:
+ 135 0032 9281      		ldd r25,Z+2
+ 136               	.LVL9:
+ 137               	.LBB40:
+ 138               	.LBB41:
+ 139               	.LM25:
+ 140 0034 8FBF      		out __SREG__,r24
+ 141               	.LM26:
+ 142               	.LM27:
+ 143 0036 80E0      		ldi r24,lo8(0)
+ 144               	.LVL10:
+ 145 0038 2917      		cp r18,r25
+ 146 003a 00F0      		brlo .L7
+ 147 003c 81E0      		ldi r24,lo8(1)
+ 148               	.L7:
+ 149               	.LBE41:
+ 150               	.LBE40:
+ 151               	.LBE37:
+ 152               	.LM28:
+ 153 003e 0895      		ret
+ 154               	.LFE17:
+ 156               	.global	can_buffer_get_enqueue_ptr
+ 158               	can_buffer_get_enqueue_ptr:
+ 159               	.LFB18:
+ 160               	.LM29:
+ 161               	.LVL11:
+ 162 0040 CF93      		push r28
+ 163 0042 DF93      		push r29
+ 164               	/* prologue: function */
+ 165               	/* frame size = 0 */
+ 166 0044 EC01      		movw r28,r24
+ 167               	.LM30:
+ 168 0046 00D0      		rcall can_buffer_full
+ 169               	.LVL12:
+ 170 0048 8823      		tst r24
+ 171 004a 01F0      		breq .L10
+ 172 004c 20E0      		ldi r18,lo8(0)
+ 173 004e 30E0      		ldi r19,hi8(0)
+ 174 0050 00C0      		rjmp .L11
+ 175               	.L10:
+ 176               	.LM31:
+ 177 0052 8C81      		ldd r24,Y+4
+ 178 0054 2EE0      		ldi r18,lo8(14)
+ 179 0056 829F      		mul r24,r18
+ 180 0058 C001      		movw r24,r0
+ 181 005a 1124      		clr r1
+ 182 005c 2881      		ld r18,Y
+ 183 005e 3981      		ldd r19,Y+1
+ 184 0060 280F      		add r18,r24
+ 185 0062 391F      		adc r19,r25
+ 186               	.L11:
+ 187               	.LM32:
+ 188 0064 C901      		movw r24,r18
+ 189               	/* epilogue start */
+ 190 0066 DF91      		pop r29
+ 191 0068 CF91      		pop r28
+ 192               	.LVL13:
+ 193 006a 0895      		ret
+ 194               	.LFE18:
+ 196               	.global	can_buffer_enqueue
+ 198               	can_buffer_enqueue:
+ 199               	.LFB19:
+ 200               	.LM33:
+ 201               	.LVL14:
+ 202               	/* prologue: function */
+ 203               	/* frame size = 0 */
+ 204 006c FC01      		movw r30,r24
+ 205               	.LBB42:
+ 206               	.LM34:
+ 207 006e 2FB7      		in r18,__SREG__
+ 208               	.LVL15:
+ 209               	.LBB43:
+ 210               	.LBB44:
+ 211               	.LM35:
+ 212               	/* #APP */
+ 213               	 ;  50 "c:/winavr-20100110/lib/gcc/../../avr/include/util/atomic.h" 1
+ 214 0070 F894      		cli
+ 215               	 ;  0 "" 2
+ 216               	/* #NOAPP */
+ 217               	.LBE44:
+ 218               	.LBE43:
+ 219               	.LM36:
+ 220 0072 8381      		ldd r24,Z+3
+ 221               	.LVL16:
+ 222 0074 8F5F      		subi r24,lo8(-(1))
+ 223 0076 8383      		std Z+3,r24
+ 224               	.LM37:
+ 225 0078 8481      		ldd r24,Z+4
+ 226 007a 8F5F      		subi r24,lo8(-(1))
+ 227 007c 8483      		std Z+4,r24
+ 228 007e 9281      		ldd r25,Z+2
+ 229 0080 8917      		cp r24,r25
+ 230 0082 00F0      		brlo .L14
+ 231               	.LM38:
+ 232 0084 1482      		std Z+4,__zero_reg__
+ 233               	.L14:
+ 234               	.LBB45:
+ 235               	.LBB46:
+ 236               	.LM39:
+ 237 0086 2FBF      		out __SREG__,r18
+ 238               	.LM40:
+ 239               	/* epilogue start */
+ 240               	.LBE46:
+ 241               	.LBE45:
+ 242               	.LBE42:
+ 243               	.LM41:
+ 244 0088 0895      		ret
+ 245               	.LFE19:
+ 247               	.global	can_buffer_get_dequeue_ptr
+ 249               	can_buffer_get_dequeue_ptr:
+ 250               	.LFB20:
+ 251               	.LM42:
+ 252               	.LVL17:
+ 253 008a CF93      		push r28
+ 254 008c DF93      		push r29
+ 255               	/* prologue: function */
+ 256               	/* frame size = 0 */
+ 257 008e EC01      		movw r28,r24
+ 258               	.LM43:
+ 259 0090 00D0      		rcall can_buffer_empty
+ 260               	.LVL18:
+ 261 0092 8823      		tst r24
+ 262 0094 01F0      		breq .L17
+ 263 0096 20E0      		ldi r18,lo8(0)
+ 264 0098 30E0      		ldi r19,hi8(0)
+ 265 009a 00C0      		rjmp .L18
+ 266               	.L17:
+ 267               	.LM44:
+ 268 009c 8D81      		ldd r24,Y+5
+ 269 009e 2EE0      		ldi r18,lo8(14)
+ 270 00a0 829F      		mul r24,r18
+ 271 00a2 C001      		movw r24,r0
+ 272 00a4 1124      		clr r1
+ 273 00a6 2881      		ld r18,Y
+ 274 00a8 3981      		ldd r19,Y+1
+ 275 00aa 280F      		add r18,r24
+ 276 00ac 391F      		adc r19,r25
+ 277               	.L18:
+ 278               	.LM45:
+ 279 00ae C901      		movw r24,r18
+ 280               	/* epilogue start */
+ 281 00b0 DF91      		pop r29
+ 282 00b2 CF91      		pop r28
+ 283               	.LVL19:
+ 284 00b4 0895      		ret
+ 285               	.LFE20:
+ 287               	.global	can_buffer_dequeue
+ 289               	can_buffer_dequeue:
+ 290               	.LFB21:
+ 291               	.LM46:
+ 292               	.LVL20:
+ 293               	/* prologue: function */
+ 294               	/* frame size = 0 */
+ 295 00b6 FC01      		movw r30,r24
+ 296               	.LBB47:
+ 297               	.LM47:
+ 298 00b8 2FB7      		in r18,__SREG__
+ 299               	.LVL21:
+ 300               	.LBB48:
+ 301               	.LBB49:
+ 302               	.LM48:
+ 303               	/* #APP */
+ 304               	 ;  50 "c:/winavr-20100110/lib/gcc/../../avr/include/util/atomic.h" 1
+ 305 00ba F894      		cli
+ 306               	 ;  0 "" 2
+ 307               	/* #NOAPP */
+ 308               	.LBE49:
+ 309               	.LBE48:
+ 310               	.LM49:
+ 311 00bc 8381      		ldd r24,Z+3
+ 312               	.LVL22:
+ 313 00be 8150      		subi r24,lo8(-(-1))
+ 314 00c0 8383      		std Z+3,r24
+ 315               	.LM50:
+ 316 00c2 8581      		ldd r24,Z+5
+ 317 00c4 8F5F      		subi r24,lo8(-(1))
+ 318 00c6 8583      		std Z+5,r24
+ 319 00c8 9281      		ldd r25,Z+2
+ 320 00ca 8917      		cp r24,r25
+ 321 00cc 00F0      		brlo .L21
+ 322               	.LM51:
+ 323 00ce 1582      		std Z+5,__zero_reg__
+ 324               	.L21:
+ 325               	.LBB50:
+ 326               	.LBB51:
+ 327               	.LM52:
+ 328 00d0 2FBF      		out __SREG__,r18
+ 329               	.LM53:
+ 330               	/* epilogue start */
+ 331               	.LBE51:
+ 332               	.LBE50:
+ 333               	.LBE47:
+ 334               	.LM54:
+ 335 00d2 0895      		ret
+ 336               	.LFE21:
+ 410               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 can_buffer.c
+C:\Users\zag00046\AppData\Local\Temp/cceokcA3.s:2      *ABS*:0000003f __SREG__
+C:\Users\zag00046\AppData\Local\Temp/cceokcA3.s:3      *ABS*:0000003e __SP_H__
+C:\Users\zag00046\AppData\Local\Temp/cceokcA3.s:4      *ABS*:0000003d __SP_L__
+C:\Users\zag00046\AppData\Local\Temp/cceokcA3.s:5      *ABS*:00000034 __CCP__
+C:\Users\zag00046\AppData\Local\Temp/cceokcA3.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\zag00046\AppData\Local\Temp/cceokcA3.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\zag00046\AppData\Local\Temp/cceokcA3.s:18     .text:00000000 can_buffer_init
+C:\Users\zag00046\AppData\Local\Temp/cceokcA3.s:65     .text:00000016 can_buffer_empty
+C:\Users\zag00046\AppData\Local\Temp/cceokcA3.s:110    .text:0000002a can_buffer_full
+C:\Users\zag00046\AppData\Local\Temp/cceokcA3.s:158    .text:00000040 can_buffer_get_enqueue_ptr
+C:\Users\zag00046\AppData\Local\Temp/cceokcA3.s:198    .text:0000006c can_buffer_enqueue
+C:\Users\zag00046\AppData\Local\Temp/cceokcA3.s:249    .text:0000008a can_buffer_get_dequeue_ptr
+C:\Users\zag00046\AppData\Local\Temp/cceokcA3.s:289    .text:000000b6 can_buffer_dequeue
+
+NO UNDEFINED SYMBOLS

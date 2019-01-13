@@ -1,0 +1,19 @@
+
+PCM - Powertrain Control Module (Engine ECU)
+1.6 Duratec 16V PFI (74kW/100PS) 2007,Ford Focus
+ISO15765-CAN
+7M51-12A650-AFB
+
+=================================================================================
+|Description                            |Value                                  |
+=================================================================================
+|ECU Part Number                        |7M51-12A650-AFB                        |
+|VIN Code                               |WF05XXGCD57M22888                      |
+|ECU Serial Number                      |270487626                              |
+|Manufacturing Date                     |2006/57/27                             |
+|System Identification                  |SIM-28                                 |
+|Car Family                             |Ford Focus                             |
+|Selected ECU                           |PcmCanSim2816Duratec_Focus_2007_2      |
+|Protocol                               |CAN                                    |
+|Bus Type                               |HSCAN                                  |
+=================================================================================
